@@ -1,0 +1,9 @@
+.hw7-main-navigation__point {
+    font-size: 11px;
+    color: rgb(142, 141, 147);
+    font-weight: 900;
+}
+
+.hw7-main-navigation__point:hover {
+    color: rgb(228, 174, 88);
+}

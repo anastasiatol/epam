@@ -1,0 +1,36 @@
+.hw7-skills__progress-scale-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: black;
+    position: relative;
+    top: 13px;
+}
+
+.hw7-skills__progress-scale {
+    height: 3px;
+    width: 100%;
+    background: white;
+    color: black;
+    border: none;
+}
+
+.hw7-skills__progress-scale::-moz-progress-bar {
+    background: black;
+    color: white;
+}
+
+.hw7-skills__progress-scale::-webkit-progress-bar {
+    background: white;
+}
+
+.hw7-skills__progress-scale::-webkit-progress-value {
+    background: black;
+}
+
+.hw7-skills__progress-scale-value {
+    color: white;
+    font-size: 12px;
+    position: relative;
+    top: 17px;
+    float: right;
+}

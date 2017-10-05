@@ -1,0 +1,30 @@
+.hw7-list__item {
+    margin-top: 20px;
+}
+
+.hw7-list__text {
+    position: relative;
+    left: 50px;
+    padding-right: 50px;
+}
+
+.hw7-list__icon {
+    position: absolute;
+}
+
+.hw7-list__name {
+    font-size: 16px;
+    display: inline-block;
+}
+
+.hw7-list__date {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(87, 50, 44);
+}
+
+.hw7-list__description {
+    font-size: 12px;
+    margin-top: 10px;
+}

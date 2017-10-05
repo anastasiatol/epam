@@ -1,0 +1,94 @@
+.hw7-block_color_beige {
+    background-color: rgb(240, 226, 215);
+    color: rgb(142, 141, 147);
+}
+
+.hw7-block_color_white {
+    background-color: rgb(255, 255, 255);
+    color: rgb(142, 141, 147);
+}
+
+.hw7-block_color_yellow {
+    background-color: rgb(228, 174, 88);
+    color: rgb(255, 249, 226);
+}
+
+.hw7-block_color_red {
+    background-color: rgb(233, 113, 76);
+    color: rgb(255, 249, 226);
+}
+
+.hw7-block_color_black {
+    background-color: rgb(22, 22, 22);
+    color: rgb(255, 255, 255);
+}
+
+.hw7-block_photo-5 {
+    background-image: url(../images/5.jpg);
+    background-size: auto 140%;
+}
+
+.hw7-block_photo-1 {
+    background-image: url(../images/1.jpg);
+    background-size: auto 150%;
+    background-position: top;
+}
+
+.hw7-block_photo-4 {
+    background-image: url(../images/4.jpg);
+    background-size: 150% auto;
+}
+
+.hw7-block_photo-3 {
+    background-image: url(../images/3.jpg);
+    background-size: 150% auto;
+}
+
+.hw7-block_photo-2 {
+    background-image: url(../images/2.jpg);
+    background-size: auto 120%;
+}
+
+.hw7-block_text_center {
+    text-align: center;
+}
+
+.hw7-block__main-navigation {
+    display: flex;
+    justify-content: space-around;
+}
+.hw7-block__title {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.hw7-block__subtitle {
+    font-size: 12px;
+    margin: 10px 0px 25px 0px;
+}
+
+.hw7-block__subtitle_yellow {
+    color: rgb(228, 174, 88);
+}
+
+.hw7-block__title_small {
+    font-size: 16px;
+    margin-top: 25px;
+}
+.hw7-block__title_black{
+    color: rgb(39, 42, 47);
+}
+
+.hw7-block__maintext {
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 10px;
+}
+
+.hw7-block__icon_black {
+    color: rgb(39, 42, 47);
+}
+
+.hw7-block__skills {
+    margin-top: 15px;
+}

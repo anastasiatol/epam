@@ -3,13 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Stimulus</title>
 
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-main.css" rel="stylesheet">
+    <link href="css/hw7-big-container-style.css" rel="stylesheet">
+    <link href="css/hw7-block-style.css" rel="stylesheet">
+    <link href="css/hw7-main-navigation-style.css" rel="stylesheet">
+    <link href="css/hw7-greeting-block-style.css" rel="stylesheet">
+    <link href="css/hw7-skills-style.css" rel="stylesheet">
+    <link href="css/hw7-list-style.css" rel="stylesheet">
+    <link href="css/hw7-photo-line.css" rel="stylesheet">
+    <link href="css/hw7-message-form.css" rel="stylesheet">
+    <link href="css/hw7-contacts-style.css" rel="stylesheet">
+    <link href="css/hw7-footer-style.css" rel="stylesheet">
+    
     <link rel="stylesheet" href='font-awesome/css/font-awesome.min.css'>
+    
     <link rel="stylesheet" href="css/media-queries.css">
 
-    <meta name='vieport' content='width=device-width, initial-scale=1'>
+    <meta name='vieport' content='width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0'>
 </head>
 
 <body>
@@ -17,14 +29,14 @@
 
         <!--1-->
         <div id='home' class="hw7-block hw7-big-container__block     
-                    hw7-big-container__block_size_big-sqr
-                    hw7-block_photo_5">
+                    hw7-big-container__block_size_big
+                    hw7-block_photo-5">
         </div>
 
         <!--2-->
         <div class="hw7-block hw7-big-container__block
                     hw7-block_color_beige
-                    hw7-big-container__block_size_big-sqr">
+                    hw7-big-container__block_size_big">
             <ul class='hw7-main-navigation hw7-block__main-navigation'>
                 <a href='#home'>
                     <li class='hw7-main-navigation__point'>HOME</li>
@@ -42,26 +54,27 @@
                     <li class='hw7-main-navigation__point'>CONTACT</li>
                 </a>
             </ul>
-            <div class='hw7-block__greeting'>
+            <div class='hw7-greeting-block hw7-block__greeting-block'>
+               <div class='hw7-greeting-block__welcome '>
                 WELCOME TO MY WEBSITE
             </div>
-            <div class="hw7-block__title 
-                        hw7-block__title_black">
+            <div class="hw7-greeting-block__title">
                 Hello, I am <b>Stimulus</b> currently based in New York&nbsp;city.
             </div>
-            <div class="hw7-block__maintext">
+            <div class="hw7-greeting-block__maintext">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quisque id diam vel quam elementum pulvinar etiam non quam. Turpis massa tincidunt dui ut ornare lectus.
             </div>
-            <button class="hw7-block__button">
+            <button class="hw7-greeting-block__button">
                 GET STARTED
             </button>
+            </div>
         </div>
 
         <!--3-->
 
         <div id='about-me' class="hw7-block hw7-big-container__block
                                   hw7-block_color_white
-                                  hw7-big-container__block_size_orthogon">
+                                  hw7-big-container__block_size_big">
             <div class="hw7-block__title
                         hw7-block__title_black">
                 Donec auctor
@@ -80,14 +93,14 @@
 
         <!--4-->
         <div class="hw7-block hw7-big-container__block     
-                    hw7-big-container__block_size_small-sqr
-                    hw7-block_photo_1">
+                    hw7-big-container__block_size_small
+                    hw7-block_photo-1">
         </div>
 
         <!--5-->
         <div class="hw7-block hw7-big-container__block
                     hw7-block_color_yellow 
-                    hw7-big-container__block_size_small-sqr">
+                    hw7-big-container__block_size_small">
             <div class="hw7-block__title">
                 My Skills
             </div>
@@ -110,12 +123,12 @@
         <!--6-->
         <div class="hw7-block hw7-big-container__block
                     hw7-block_color_yellow 
-                    hw7-big-container__block_size_small-sqr
+                    hw7-big-container__block_size_small
                     hw7-block_text_center">
             <div class="hw7-block__icon">
                 <i class="fa fa-desktop fa-2x" aria-hidden="true"></i>
             </div>
-            <div class="hw7-block__small-title">
+            <div class="hw7-block__title_small">
                 Interface Design
             </div>
             <div class="hw7-block__maintext">
@@ -126,12 +139,12 @@
         <!--7-->
         <div class="hw7-block hw7-big-container__block
                     hw7-block_color_red 
-                    hw7-big-container__block_size_small-sqr
+                    hw7-big-container__block_size_small
                     hw7-block_text_center">
             <div class="hw7-block__icon">
                 <i class="fa fa-paper-plane fa-2x" aria-hidden="true"></i>
             </div>
-            <div class="hw7-block__small-title">
+            <div class="hw7-block__title_small">
                 Media Strategy
             </div>
             <div class="hw7-block__maintext">
@@ -142,12 +155,12 @@
         <!--8-->
         <div class="hw7-block hw7-big-container__block
                     hw7-block_color_black 
-                    hw7-big-container__block_size_small-sqr
+                    hw7-big-container__block_size_small
                     hw7-block_text_center">
             <div class="hw7-block__icon">
                 <i class="fa fa-table fa-2x" aria-hidden="true"></i>
             </div>
-            <div class="hw7-block__small-title">
+            <div class="hw7-block__title_small">
                 Mobile App
             </div>
             <div class="hw7-block__maintext">
@@ -158,14 +171,15 @@
         <!--9-->
         <div class="hw7-block hw7-big-container__block
                     hw7-block_color_white 
-                    hw7-big-container__block_size_small-sqr
+                    hw7-big-container__block_size_small
                     hw7-block_text_center">
             <div class="hw7-block__icon 
                         hw7-block__icon_black">
                 <i class="fa fa-html5 fa-2x" aria-hidden="true"></i>
             </div>
-            <div class="hw7-block__small-title 
-                        hw7-block__small-title_black">
+            <div class="hw7-block__title_small 
+                        hw7-block__title_small 
+                        hw7-block__title_black">
                 Coding
             </div>
             <div class="hw7-block__maintext">
@@ -175,14 +189,14 @@
 
         <!--10-->
         <div class="hw7-block hw7-big-container__block     
-                    hw7-big-container__block_size_orthogon
-                    hw7-block_photo_4">
+                    hw7-big-container__block_size_big
+                    hw7-block_photo-4">
         </div>
 
         <!--11-->
         <div id='experiences' class="hw7-block hw7-big-container__block
                     hw7-block_color_red
-                    hw7-big-container__block_size_orthogon">
+                    hw7-big-container__block_size_big">
             <div class="hw7-block__title">
                 My Experiences
             </div>
@@ -228,7 +242,7 @@
         <!--12-->
         <div class="hw7-block hw7-big-container__block
                     hw7-block_color_yellow
-                    hw7-big-container__block_size_orthogon">
+                    hw7-big-container__block_size_big">
             <div class="hw7-block__title">
                 My Education
             </div>
@@ -273,8 +287,8 @@
 
         <!--13-->
         <div class="hw7-block hw7-big-container__block     
-                    hw7-big-container__block_size_orthogon
-                    hw7-block_photo_3">
+                    hw7-big-container__block_size_big
+                    hw7-block_photo-3">
         </div>
 
         <!--14-->
@@ -297,7 +311,7 @@
         <!--15-->
         <div class="hw7-block hw7-big-container__block
                     hw7-block_color_red 
-                    hw7-big-container__block_size_big-sqr">
+                    hw7-big-container__block_size_big">
             <div class='hw7-block__title'>
                 Say hello..
             </div>
@@ -317,14 +331,14 @@
 
         <!--16-->
         <div class="hw7-block hw7-big-container__block     
-                    hw7-big-container__block_size_small-sqr
-                    hw7-block_photo_2">
+                    hw7-big-container__block_size_small
+                    hw7-block_photo-2">
         </div>
 
         <!--17-->
         <div id='contacts' class="hw7-block hw7-big-container__block
                     hw7-block_color_black
-                    hw7-big-container__block_size_small-sqr">
+                    hw7-big-container__block_size_small">
             <div class='hw7-contacts hw7-block__contacts'>
                 <div class='hw7-contacts__title'>
                     Visit my office
@@ -361,23 +375,25 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--18-->
-    <div class="hw7-footer">
-        <div class='hw7-footer__content'>
-            <div class="hw7-footer__text">
-                Copyright &copy; 2016 Your Company | Design:
-                <a class="hw7-footer__ref" href='https://www.epam-group.ru/' target="_blank">
-                        templatemo
-                    </a>
-            </div>
-            <div class='hw7-footer__icons'>
-                <a class="hw7-footer__icon" href='https://www.facebook.com/' target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a class="hw7-footer__icon" href='https://twitter.com/?lang=ru' target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                <a class="hw7-footer__icon" href='https://plus.google.com/discover?hl=ru' target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                <a class="hw7-footer__icon" href='http://www.hbo.com/silicon-valley/' target="_blank"><i class="fa fa-pied-piper-alt" aria-hidden="true"></i></a>
-                <a class="hw7-footer__icon" href='https://ru.linkedin.com/' target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+
+        <!--18-->
+        <div class="hw7-footer
+                    hw7-big-container__footer">
+            <div class='hw7-footer__content'>
+                <div class="hw7-footer__text">
+                    Copyright &copy; 2016 Your Company | Design:
+                    <a class="hw7-footer__ref" href='https://www.epam-group.ru/' target="_blank">
+                            templatemo
+                        </a>
+                </div>
+                <div class='hw7-footer__icons'>
+                    <a class="hw7-footer__icon" href='https://www.facebook.com/' target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    <a class="hw7-footer__icon" href='https://twitter.com/?lang=ru' target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    <a class="hw7-footer__icon" href='https://plus.google.com/discover?hl=ru' target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                    <a class="hw7-footer__icon" href='http://www.hbo.com/silicon-valley/' target="_blank"><i class="fa fa-pied-piper-alt" aria-hidden="true"></i></a>
+                    <a class="hw7-footer__icon" href='https://ru.linkedin.com/' target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,38 @@
+.hw7-message-form__input {
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: rgb(228, 174, 88) 1px solid;
+    background-color: rgb(233, 113, 76);
+    line-height: 30px;
+}
+
+.hw7-message-form__input::-webkit-input-placeholder {
+    color: rgb(255, 249, 226);
+}
+
+.hw7-message-form__input::-moz-placeholder {
+    color: rgb(255, 249, 226);
+}
+
+.hw7-message-form__input:-moz-placeholder {
+    color: rgb(255, 249, 226);
+}
+
+.hw7-message-form__input:-ms-input-placeholder {
+    color: rgb(255, 249, 226);
+}
+
+.hw7-message-form__input:focus {
+    outline: none;
+}
+
+.hw7-message-form__button {
+    background-color: rgb(255, 255, 255);
+    width: 200px;
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-top: 20px;
+}
