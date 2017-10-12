@@ -1,8 +1,11 @@
 .hw7-big-container {
-    display: flex;
-    flex-wrap: wrap;
     max-width: 2100px;
     margin: auto;
+}
+
+.hw7-big-container_flex {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .hw7-big-container__block {
