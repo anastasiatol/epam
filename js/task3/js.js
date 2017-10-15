@@ -1,16 +1,18 @@
-var allArguments = [];
-
-var addArguments = function(...arg){
-    if (arg.length){
-        for (i=0; i<arg.length; i++) {
-            allArguments.push(arg[i]);
+var addArguments = function(){
+    var allArguments = [];
+    return function(...arg){
+        if (arg.length){
+            for (var i=0; i<arg.length; i++) {
+                allArguments.push(arg[i]);
+            };
+        } else {
+            console.log(allArguments);
         };
-    } else {
-        console.log(allArguments);
     };
 };
 
-addArguments(1,2);
-addArguments('hello');
-addArguments({a:1}, 'someString');
-addArguments();
+var collectArguments = addArguments();
+collectArguments(1,2);
+collectArguments('hello');
+collectArguments({a:1}, 'someString');
+collectArguments();
