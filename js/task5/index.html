@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Homework4</title>
+    <link rel='stylesheet' href="style.css">
+</head>
+
+<body>
+    <div class='box'>
+        <form class='event-form'>
+            <div class='event-form__input-names'>Event name</div>
+            <input class='event-form__input-area' id='eventName' type='text' required>
+            <br>
+            <table>
+                <tr class='event-form__input-names'>
+                    <td colspan="2">From</td>
+                </tr>
+                <tr>
+                    <td><input type="date" id='dataStart' required min="2017-09-25" value="2014-02-10"></td>
+                    <td><input type="time" id='timeStart' value="19:30"></td>
+                </tr>
+                <tr class='event-form__error-message'>
+                    <td colspan="2">Date occurs in the past</td>
+                </tr>
+                <tr class='event-form__input-names'>
+                    <td colspan="2">To</td>
+                </tr>
+                <tr>
+                    <td><input type="date" id='dataEnd' required min="2017-09-25" value="2014-02-10"></td>
+                    <td><input type="time" id='timeEnd' value="23:30"></td>
+                </tr>
+                <tr class='event-form__error-message'>
+                    <td colspan="2">Date occurs in the past</td>
+                </tr>
+            </table>
+            <br>
+            <div class='event-form__input-names'>
+                Dress code
+            </div>
+            <p>
+                <input type='radio' name='dress-code' value='BT' required>
+                <span class='event-form__input-names'>Black Tie</span>
+            </p>
+            <p>
+                <input type='radio' name='dress-code' value='A5' required>
+                <span class='event-form__input-names'>After Five</span>
+            </p>
+            <br>
+            <br>
+            <div class='event-form__input-names'>
+                Cuisine
+            </div>
+            <select class='event-form__input-area' id='cuisine' required>
+            <option>Italian</option>
+            <option>Belorusian</option>
+            <option>Japanese</option>
+            <option>French</option>
+        </select>
+            <br>
+            <div class='event-form__input-names'>
+                Beverages
+            </div>
+            <select class='event-form__input-area' id='beverages' required>
+            <option>Soft</option>
+            <option>Alcoholic</option>
+        </select>
+            <br>
+            <div class='event-form__input-names'>Description</div>
+            <textarea class='event-form__input-area' id='description' type='text' rows="3"></textarea>
+            <br>
+        </form>
+        <button id='refresh'>Refresh</button>
+    </div>
+
+    <script src="js.js"></script>
+</body>
+
+</html>
