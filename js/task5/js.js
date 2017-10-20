@@ -1,3 +1,8 @@
+
+if (performance.navigation.type === 1) {
+    localStorage.clear();
+}
+
 var eventName = document.getElementById('eventName');
 var dataStart = document.getElementById('dataStart');
 var timeStart = document.getElementById('timeStart');
@@ -60,9 +65,3 @@ beverages.onblur = function () {
 description.onblur = function () {
     localStorage.setItem('description', description.value);
 };
-
-var refresh = document.getElementById('refresh');
-refresh.onclick = function () {
-    localStorage.clear();
-    location.reload();
-}
