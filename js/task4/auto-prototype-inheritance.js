@@ -3,13 +3,14 @@ function car(model, issueYear, price) {
     this.issueYear = issueYear;
     this.price = price;
     this.wheels = 4;
-    this.sound = function () {
-        console.log('beep-beep')
-    }
 };
 
+car.prototype.sound = function () {
+        console.log(this.model, ': beep-beep')
+    }
+
 function jeepCar(model, issueYear, price) {
-    car.prototype.constructor(model, issueYear, price);
+    car.call(this, model, issueYear, price);
     this.doors = 5;
     this.go = function () {
         console.log(this.model, 'goes anywhere')
@@ -17,7 +18,7 @@ function jeepCar(model, issueYear, price) {
 }
 
 function sedanCar(model, issueYear, price) {
-    car.prototype.constructor(model, issueYear, price);
+    car.call(this, model, issueYear, price);
     this.doors = 4;
     this.go = function () {
         console.log(this.model, 'goes on the wide road')
@@ -25,17 +26,21 @@ function sedanCar(model, issueYear, price) {
 }
 
 function coupeCar(model, issueYear, price) {
-    car.prototype.constructor(model, issueYear, price);
+    car.call(this, model, issueYear, price);
     this.doors = 2;
     this.go = function () {
         console.log(this.model, 'goes on narrow streets')
     };
 }
 
-jeepCar.prototype = car.prototype;
-sedanCar.prototype = car.prototype;
-coupeCar.prototype = car.prototype;
+jeepCar.prototype = Object.create(car.prototype);
+jeepCar.prototype.constructor = jeepCar;
 
+sedanCar.prototype = Object.create(car.prototype);
+sedanCar.prototype.constructor = sedanCar;
+
+coupeCar.prototype = Object.create(car.prototype);
+coupeCar.prototype.constructor = coupeCar;
 
 var jeepCherokee = new jeepCar('Cherokee', 2015, '40000 BYN');
 var sedanMazda6 = new sedanCar('Mazda6', 2012, '35000 BYN');
