@@ -6,8 +6,7 @@ buttonLeft.onclick = function() {
         yearToDraw = yearToDraw -1;
     };
     days.innerHTML = '';
-    titleMonth.innerHTML = monthToDraw + 1;
-    titleYear.innerHTML = yearToDraw;
+    drawTitleMonthYear(monthToDraw, yearToDraw);
     drawMonth (monthToDraw, yearToDraw);
 };
 
@@ -19,7 +18,6 @@ buttonRight.onclick = function() {
         yearToDraw = yearToDraw + 1;
     };
     days.innerHTML = '';
-    titleMonth.innerHTML = monthToDraw + 1;
-    titleYear.innerHTML = yearToDraw;
+    drawTitleMonthYear(monthToDraw, yearToDraw);
     drawMonth (monthToDraw, yearToDraw);
 };
