@@ -1,0 +1,47 @@
+[
+    {
+        "tag": "div",
+        "class": "t6-calendar",
+        "childrens": [{
+                "tag": "div",
+                "class": "t6-calendar__calendar-header t6-calendar-header",
+                "childrens": [{
+                        "tag": "div",
+                        "class": "t6-calendar-header__button",
+                        "content": "&#9668",
+                        "event": ["click", "Сalendar.goPreviousMonth"]
+                    },
+                    {
+                        "tag": "div",
+                        "class": "t6-calendar-header__title",
+                        "data": "currentMonth"
+                     },
+                    {
+                        "tag": "div",
+                        "class": "t6-calendar-header__title",
+                        "data": "currentYear"
+                     },
+                    {
+                        "tag": "div",
+                        "class": "t6-calendar-header__button",
+                        "content": "&#9658",
+                        "event": ["click", "Сalendar.goNextMonth"]
+                     }]
+            },
+            {
+                "tag": "div",
+                "class": "t6-calendar__weekLine",
+                "content": "Su Mo Tu We Th Fr Sa"
+             },
+            {
+                "tag": "div",
+                "class": "t6-calendar__days t6-days",
+                "childrens": [{
+                    "tag": "div",
+                    "class": "t6-days__day",
+                    "datas": "indexDay",
+                    "quantity": "daysOfCurrentMonth"
+                 }]
+             }]
+    }
+]
