@@ -1,47 +1,50 @@
 [
     {
         "tag": "div",
-        "class": "t6-calendar",
+        "class": "t6-calendar__calendar-header t6-calendar-header",
         "childrens": [{
                 "tag": "div",
-                "class": "t6-calendar__calendar-header t6-calendar-header",
-                "childrens": [{
-                        "tag": "div",
-                        "class": "t6-calendar-header__button",
-                        "content": "&#9668",
-                        "event": ["click", "Сalendar.goPreviousMonth"]
+                "class": "t6-calendar-header__button",
+                "content": "&#9668",
+                "event": ["click", "goPreviousMonth"]
                     },
-                    {
-                        "tag": "div",
-                        "class": "t6-calendar-header__title",
-                        "data": "currentMonth"
+            {
+                "tag": "div",
+                "class": "t6-calendar-header__title",
+                "data": "currentMonthName"
                      },
-                    {
-                        "tag": "div",
-                        "class": "t6-calendar-header__title",
-                        "data": "currentYear"
+            {
+                "tag": "div",
+                "class": "t6-calendar-header__title",
+                "data": "currentYear"
                      },
-                    {
-                        "tag": "div",
-                        "class": "t6-calendar-header__button",
-                        "content": "&#9658",
-                        "event": ["click", "Сalendar.goNextMonth"]
+            {
+                "tag": "div",
+                "class": "t6-calendar-header__button",
+                "content": "&#9658",
+                "event": ["click", "goNextMonth"]
                      }]
             },
-            {
-                "tag": "div",
-                "class": "t6-calendar__weekLine",
-                "content": "Su Mo Tu We Th Fr Sa"
-             },
-            {
-                "tag": "div",
-                "class": "t6-calendar__days t6-days",
-                "childrens": [{
-                    "tag": "div",
-                    "class": "t6-days__day",
-                    "datas": "indexDay",
-                    "quantity": "daysOfCurrentMonth"
+    {
+        "tag": "div",
+        "class": "t6-calendar__weekLine",
+        "childrens": [{
+            "tag": "div",
+            "class": "t6-calendar__day-week",
+            "datas": "weekName",
+            "quantity": "weekName"
                  }]
-             }]
+             },
+    {
+        "tag": "div",
+        "class": "t6-calendar__days t6-days",
+        "childrens": [{
+            "tag": "div",
+            "class": "t6-days__day",
+            "datas": "indexDay",
+            "quantity": "daysOfCurrentMonth",
+            "check": "isToday"
+                 }]
+
     }
 ]
