@@ -38,6 +38,7 @@
     {
         "tag": "div",
         "class": "t6-calendar__days t6-days",
+        "event": ["click", "selectDay", "t6-days__day", "t6-days__day_selected"],
         "childrens": [{
             "tag": "div",
             "class": "t6-days__day",

@@ -7,7 +7,7 @@ function renderCalendar(sourceTemplate, dataCalendar) {
     this.parentElement = [this.mainContainer];
     this.indexParentElement = 0;
     
-    this.makeCalendar(this.template, dataCalendar);
+    this.makeCalendar(this.template, this.dataCalendar);
 };
 
 renderCalendar.prototype.getCalendarTemplate = function (sourceTemplate) {
@@ -29,7 +29,7 @@ renderCalendar.prototype.makeCalendar = function (template, dataCalendar) {
             var newElement = document.createElement(item.tag);
             newElement.setAttribute('class', item.class);
             if (item.event) {
-                newElement.addEventListener (item.event[0], eval('this.' + item.event[1]).bind(this));
+                newElement.addEventListener (item.event[0], eval('this.' + item.event[1]).bind(this, item));
             };
             if (item.content) {
                 newElement.innerHTML = item.content;
@@ -50,7 +50,7 @@ renderCalendar.prototype.makeCalendar = function (template, dataCalendar) {
                 if (dataCalendar[item.quantity][indexChildren] !== 0) {
                     newElement.innerHTML = dataCalendar[item.quantity][indexChildren];
                 } else {
-                    newElement.setAttribute('class', item.class, 't6-days__day_empty');
+                    newElement.classList.add('t6-days__day_empty');
                 }
             };
             this.parentElement[this.indexParentElement].appendChild(newElement);
@@ -70,16 +70,18 @@ renderCalendar.prototype.goPreviousMonth = function() {
     this.makeCalendar(this.template, this.dataCalendar);    
 };
 
+renderCalendar.prototype.selectDay = function(item, event){
+    if (this.target) {
+        this.target.classList.remove(item.event[3]);
+    };
+    this.target = event.target;
+    if (this.target.className === item.event[2]) {
+        this.target.classList.add(item.event[3]);
+    };
+};
+
 renderCalendar.prototype.goNextMonth = function() {
     this.dataCalendar.goNextMonth();
     this.mainContainer.innerHTML = '';
     this.makeCalendar(this.template, this.dataCalendar);    
 };
-
-function datePicker () {
-    
-    var calendarNew = new Сalendar();
-    var renderCalendarNew = new renderCalendar('js/calendarTemplate.JSON', calendarNew);
-};
-
-datePicker();
