@@ -1,0 +1,15 @@
+{
+  "name": "without-promises",
+  "version": "1.0.0",
+  "description": "",
+  "main": "withoutPromises.js",
+  "scripts": {
+    "start": "node withoutPromises.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anastasia Tolstyko",
+  "license": "ISC",
+  "dependencies": {
+    "xmlhttprequest": "^1.8.0"
+  }
+}
