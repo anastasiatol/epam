@@ -6,11 +6,11 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
 
-    entry: "./main.js",
+    entry: "./src/app.js",
 
     output: {
         path: __dirname,
-        filename: "bundle.js"
+        filename: "./build/app.bundle.js"
     },
 
     module: {
@@ -27,6 +27,10 @@ module.exports = {
                             modules: true
                         }
                     }
+                    /*,
+                                        {
+                                            loader: "less-loader"
+                                        }*/
                 ]
             }
         ]
