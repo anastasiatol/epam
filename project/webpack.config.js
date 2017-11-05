@@ -1,5 +1,6 @@
 'use strict'
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -10,31 +11,40 @@ module.exports = {
 
     output: {
         path: __dirname,
-        filename: "./build/app.bundle.js"
+        filename: "./build/[name].bundle.js"
     },
 
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: [
-                    {
-                        loader: "style-loader"
-                        },
-                    {
-                        loader: "css-loader",
-                        options: {
-                            modules: true
-                        }
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                use: {
+                  loader: 'babel-loader',
+                  options: {
+                        presets: ['es2015', 'react']
                     }
-                    /*,
-                                        {
-                                            loader: "less-loader"
-                                        }*/
-                ]
+                }
+            },
+            {
+                test: /\.jsx$/,
+                exclude: /(node_modules)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['es2015', 'react']
+                    }
+                }
+            },
+            {
+                test: /\.less$/,
+                use: ["style-loader", "css-loader", "less-loader"]
             }
         ]
     },
+    plugins: [
+                new HtmlWebpackPlugin({template: './src/index.html',  filename: './build/index.html'})        
+            ],
 
     watch: NODE_ENV === 'development',
 

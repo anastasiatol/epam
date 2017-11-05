@@ -1,6 +1,4 @@
-require("./app.css");
-
-document.write(require("./content.js"));
+require("./app.less");
 
 import React from "react";
 import ReactDOM from "react-dom";
