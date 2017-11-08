@@ -7,7 +7,7 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
 
-    entry: "./src/app.js",
+    entry: "./src/app.jsx",
 
     output: {
         path: __dirname,
@@ -39,6 +39,17 @@ module.exports = {
             {
                 test: /\.less$/,
                 use: ["style-loader", "css-loader", "less-loader"]
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192
+                        }
+                    }
+                ]
             }
         ]
     },
