@@ -5,27 +5,23 @@ export class Searchfield extends Component {
     
     constructor(props) {
         super(props);
-        this.state = {
-            textValue: 'Search',
-            onChange: (newValue) => {
-                this.setState({
-                  textValue: newValue
-                });
-            }
-        }
+        this.searchMovie = this.searchMovie.bind(this);
     }
-        
+    
+    searchMovie(e) {
+        this.props.movietofind(e.target.value);
+    }
+
     render(){
         return (
             <div className = 'ak-searchfield ak-mainmenuline_searchfield'>
                 <div className = 'ak-searchfield_searchicon'>
-                    
                 </div>
-                <div className = 'ak-searchfield_text'>
-                    <input type='text'
-                    
+                    <input className = 'ak-searchfield_text'
+                        onChange = {this.searchMovie}
+                        type='text'
+                        placeholder = 'Search'
                 />
-                </div>
             </div>      
         );
     }
