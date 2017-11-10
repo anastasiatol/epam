@@ -24,7 +24,7 @@ class App extends Component {
     }
 
     movietofind(e) {
-        let filteredMovies = this.moviecollectionfull.filter((item) => {
+        let filteredMovies = this.moviecollectionfull.filter((item) =>{
             return item.title.toLowerCase().indexOf(e.toLowerCase()) !== -1});
           
         this.setState ({moviecollection: filteredMovies}); 
