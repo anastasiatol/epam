@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./app.less";
-import { Sidebar } from './components/sidebar/sidebar.jsx';
+import { Sidebar } from './components/sidebar.jsx';
 import  { Searchfield } from './components/searchfield.jsx';
 import { Mainmenu } from './components/mainmenu.jsx';
-import { MovieCollectionField } from './components/moviecollectionfield/moviecollectionfield.jsx';
-
+import { AddMovieForm} from './components/addmovieform/addmovieform.jsx';
 
 var getMoviecollection = function (source) {
         var xhr = new XMLHttpRequest();
@@ -19,8 +18,12 @@ class App extends Component {
         super (props);
         let moviecollectionjson = getMoviecollection('../src/data.json')
         this.moviecollectionfull = JSON.parse(moviecollectionjson);
-        this.state = {moviecollection: this.moviecollectionfull};
+        this.state = {
+            moviecollection: this.moviecollectionfull,
+            addMovieIsOpen : false
+        };
         this.movietofind = this.movietofind.bind(this);
+        this.addMovieOpen = this.addMovieOpen.bind(this);
     }
 
     movietofind(e) {
@@ -29,6 +32,16 @@ class App extends Component {
           
         this.setState ({moviecollection: filteredMovies}); 
     }
+
+    addMovieOpen() {
+        if (this.state.addMovieIsOpen) {
+            this.setState({addMovieIsOpen : false});
+        } else {
+            this.setState({addMovieIsOpen : true});
+        }
+    }
+
+
     
     render() {
         return (
@@ -37,9 +50,21 @@ class App extends Component {
                 <div className ='ak-maininformation ak-container_maininformation'>
                     <div className ='ak-mainmenuline ak-maininformation_mainmenuline'> 
                         <Searchfield movietofind = {this.movietofind}/>
-                        <Mainmenu />
+                        <Mainmenu addMovieOpen = {this.addMovieOpen}/>
+                        <AddMovieForm addMovieIsOpen = {this.state.addMovieIsOpen}/>
+                        <div className = 'ak-moviecollection ak-maininformation_moviecollection'>    
+                            {this.state.moviecollection
+                                .map((item, index) => {
+                                    return (
+                                        <div className = {'ak-moviecollection_movie ak-moviecollection_movie__'+item.id}
+                                            key = {index}>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div> 
                     </div>
-                    <MovieCollectionField moviecollection = {this.state.moviecollection}/>
+                    
                 </div>    
             </div>
         )

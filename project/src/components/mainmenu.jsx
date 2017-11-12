@@ -1,31 +1,35 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 export class Mainmenu extends Component {
 
     constructor(props) {
         super(props);
-        this.menuitems = [
-            'Add movie',
-            'About',
-            'Pricing',
-            'Blog'
-        ]
+        this.addMovie = this.addMovie.bind(this);
+        
+    }
+
+    addMovie() {
+        this.props.addMovieOpen();
     }
     
     render() {
         return (
             <div className = 'ak-mainmenu ak-mainmenuline_mainmenu'>
-               {this.menuitems
-                    .map((item, index) => {
-                        return (
-                            <div className = 'ak-mainmenu_item' key = {index}>
-                                {item}
-                            </div>
-                        )}
-                    )
-                }
-            </div>      
+                <div className = 'ak-mainmenu_item'
+                    onClick = {this.addMovie}
+                >
+                    Add movie                
+                </div>
+                <div className = 'ak-mainmenu_item'>
+                    About           
+                </div>
+                <div className = 'ak-mainmenu_item'>
+                    Pricing                
+                </div>
+                <div className = 'ak-mainmenu_item'>
+                    Blog                
+                </div>
+            </div> 
         );
     }
 }
