@@ -27,6 +27,16 @@ module.exports = {
                 }
             },
             {
+                enforce: "pre",
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: "eslint-loader",
+                options: {
+                    fix: true,
+                    failOnError: false
+                }
+            },
+            {
                 test: /\.jsx$/,
                 exclude: /(node_modules)/,
                 use: {
