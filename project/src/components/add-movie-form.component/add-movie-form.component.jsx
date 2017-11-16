@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./addmovieform.less";
+import "./add-movie-form.component.less";
 
 export class AddMovieForm extends Component {
 
@@ -32,7 +32,7 @@ export class AddMovieForm extends Component {
         this.isAdult = this.isAdult.bind(this);
 
     }
-
+ 
     checkValid() {
         this.setState( function (prevState) {
             if ((prevState.title) /*&& (prevState.poster_path)*/) {
@@ -54,9 +54,9 @@ export class AddMovieForm extends Component {
     
     addGenre(e) {
         if (e.target.type === 'checkbox') {
-            console.log (e.target.value);
+            console.log (`${e.target.value}`);
             if (this.state.genre[e.target.value]) {
-    //            this.setState({genre.e.target.value: false});
+    //            this.setState({genre: { `${e.target.value} : true});
             } else {
     //            this.setState({genre[e.target.value] : true});
             }

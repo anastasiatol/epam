@@ -1,27 +1,16 @@
 import React, { Component } from 'react';
+import {
+    HashRouter as Router,
+    Route,
+    NavLink,
+    Switch
+    } from 'react-router-dom'
 
 export class Sidebar extends Component {
 
     constructor(props) {
         super(props);
-        this.dataSidebarItems = [
-            {
-                img: '1',
-                name: 'Movies'
-            },
-            {
-                img: '2',
-                name: 'TV Shows'
-            },
-            {
-                img: '3',
-                name: 'My Library'
-            },
-            {
-                img: '4',
-                name: 'Support'
-            },
-        ]
+      
         this.opened = 
             {
                 containerClass: 'ak-sidebar ak-container_sidebar',
@@ -73,22 +62,40 @@ export class Sidebar extends Component {
                     </div>
                 </div>
                
-                {this.dataSidebarItems
-                    .map((item, index) => {
-                        return (
-                            <div className = 'ak-sidebar_item' key = {index}>
-                                <div className = 'ak-sidebar_icon'>
-                                    {item.img}
-                                </div>
-                                <div className = {this.state.itemnameClass}>
-                                    {item.name}
-                                </div>
-                            </div>  
-                            
-                           
-                        )
-                    })
-                }
+                <div className = 'ak-sidebar_item'>
+                    <div className = 'ak-sidebar_icon'>
+                        1
+                    </div>
+                    <div className = {this.state.itemnameClass}>
+                        Movies
+                    </div>
+                </div>  
+           
+                <div className = 'ak-sidebar_item' >
+                    <NavLink to = '/tvshows' className = 'ak-sidebar_icon'>
+                        2
+                    </NavLink>
+                    <NavLink to = '/tvshows' className = {this.state.itemnameClass}>
+                        TVShows
+                    </NavLink>
+                </div>  
+
+                <div className = 'ak-sidebar_item' >
+                    <div className = 'ak-sidebar_icon'>
+                        3
+                    </div>
+                    <div className = {this.state.itemnameClass}>
+                        My Library
+                    </div>
+                </div> 
+                <div className = 'ak-sidebar_item' >
+                    <div className = 'ak-sidebar_icon'>
+                        4
+                    </div>
+                    <div className = {this.state.itemnameClass}>
+                        Support
+                    </div>
+                </div>              
             </div>
         )
     }

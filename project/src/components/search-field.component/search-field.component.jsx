@@ -8,7 +8,7 @@ export class Searchfield extends Component {
     }
     
     searchMovie(e) {
-        this.props.movietofind(e.target.value);
+        this.props.movieToFind(e.target.value);
     }
 
     render(){

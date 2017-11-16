@@ -1,4 +1,4 @@
-{
+[{
     "parserOptions": {
         "ecmaVersion": 6,
         "sourceType": "module",
@@ -129,3 +129,4 @@
         "quotes": [1, "single"]
     }
 }
+]

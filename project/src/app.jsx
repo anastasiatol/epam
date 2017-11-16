@@ -1,37 +1,39 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import axios from 'axios';
+import {
+    HashRouter as Router,
+    Route,
+    NavLink,
+    Switch
+    } from 'react-router-dom'
 import "./app.less";
-import { Sidebar } from './components/sidebar.jsx';
-import  { Searchfield } from './components/searchfield.jsx';
-import { Mainmenu } from './components/mainmenu.jsx';
-import { AddMovieForm} from './components/addmovieform/addmovieform.jsx';
-
-var getMoviecollection = function (source) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', source, false);
-        xhr.send();
-        return (xhr.responseText);
-    } 
+import { Sidebar } from './components/sidebar.component/sidebar.component.jsx';
+import  { Searchfield } from './components/search-field.component/search-field.component.jsx';
+import { Mainmenu } from './components/main-menu.component/main-menu.component.jsx'
+import { AddMovieForm} from './components/add-movie-form.component/add-movie-form.component.jsx';
+import { Collection } from './components/collection.component/collection.component.jsx';
+import { Info } from './components/movie-info.component/movie-info.component.jsx'
 
 class App extends Component {
     constructor (props) {
         super (props);
-        let moviecollectionjson = getMoviecollection('../src/data.json')
-        this.moviecollectionfull = JSON.parse(moviecollectionjson);
         this.state = {
-            moviecollection: this.moviecollectionfull,
+            movieCollection: [],
+            showCollection: [],
             addMovieIsOpen : false
         };
-        this.movietofind = this.movietofind.bind(this);
+        this.movieToFind = this.movieToFind.bind(this);
         this.addMovieOpen = this.addMovieOpen.bind(this);
     }
 
-    movietofind(e) {
-        let filteredMovies = this.moviecollectionfull.filter((item) =>{
+    movieToFind(e) {
+        let filteredMovies = this.movieCollectionFull.filter((item) =>{
             return item.title.toLowerCase().indexOf(e.toLowerCase()) !== -1});
           
-        this.setState ({moviecollection: filteredMovies}); 
+        this.setState ({movieCollection: filteredMovies}); 
     }
+
 
     addMovieOpen() {
         if (this.state.addMovieIsOpen) {
@@ -41,32 +43,39 @@ class App extends Component {
         }
     }
 
-
+    componentWillMount(){
+        axios.get('https://api.themoviedb.org/3/discover/movie?api_key=4ca6d3d62547a54fe12460c06f138516&&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=2')
+        .then(response => {
+            console.log(response.data)
+            this.setState({movieCollection: response.data.results})
+        });
+        axios.get('https://api.themoviedb.org/3/tv/popular?api_key=4ca6d3d62547a54fe12460c06f138516&language=en-US&page=1')
+        .then(response => {
+            console.log(response.data)
+            this.setState({showCollection: response.data.results})
+        })
+    }
     
     render() {
         return (
-            <div className ='ak-container'>
-                <Sidebar />
-                <div className ='ak-maininformation ak-container_maininformation'>
-                    <div className ='ak-mainmenuline ak-maininformation_mainmenuline'> 
-                        <Searchfield movietofind = {this.movietofind}/>
-                        <Mainmenu addMovieOpen = {this.addMovieOpen}/>
-                        <AddMovieForm addMovieIsOpen = {this.state.addMovieIsOpen}/>
-                        <div className = 'ak-moviecollection ak-maininformation_moviecollection'>    
-                            {this.state.moviecollection
-                                .map((item, index) => {
-                                    return (
-                                        <div className = {'ak-moviecollection_movie ak-moviecollection_movie__'+item.id}
-                                            key = {index}>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div> 
-                    </div>
-                    
-                </div>    
-            </div>
+            <Router>
+                <div className ='ak-container'>
+                    <Sidebar />
+                    <div className ='ak-maininformation ak-container_maininformation'>
+                        <div className ='ak-mainmenuline ak-maininformation_mainmenuline'> 
+                            <Searchfield movieToFind = {this.movieToFind}/>
+                            <Mainmenu addMovieOpen = {this.addMovieOpen}/>
+                            <AddMovieForm addMovieIsOpen = {this.state.addMovieIsOpen}/>
+                            <Switch>
+                                <Collection exact path = '/' collection = {this.state.movieCollection} pathWay = 'movie'/>
+                                <Collection exact path = '/tvshows' collection = {this.state.showCollection} pathWay = 'tvshows'/>
+                                <Info path='/movie/:id' />
+                                <Info path='/tvshows/:id' />
+                            </Switch> 
+                        </div>
+                    </div>    
+                </div>
+            </Router>
         )
     }
 }
