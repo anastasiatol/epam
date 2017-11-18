@@ -63,12 +63,12 @@ export class Sidebar extends Component {
                 </div>
                
                 <div className = 'ak-sidebar_item'>
-                    <div className = 'ak-sidebar_icon'>
+                    <NavLink to = '/movies' className = 'ak-sidebar_icon'>
                         1
-                    </div>
-                    <div className = {this.state.itemnameClass}>
+                    </NavLink>
+                    <NavLink to = '/movies' className = {this.state.itemnameClass}>
                         Movies
-                    </div>
+                    </NavLink>
                 </div>  
            
                 <div className = 'ak-sidebar_item' >
