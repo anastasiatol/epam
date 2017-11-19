@@ -58,7 +58,6 @@ class App extends Component {
     }
     
     render() {
-        console.log (this.props)
         return (
             <Router>
                 <div className ='ak-container'>
@@ -67,7 +66,7 @@ class App extends Component {
                         <div className ='ak-mainmenuline ak-maininformation_mainmenuline'> 
                             <Searchfield movieToFind = {this.movieToFind}/>
                             <Mainmenu />
-                            <AddMovieForm isOpenedAddMovieForm = {this.props.isOpenedAddMovieForm}/>
+                            <AddMovieForm isOpenedAddMovieForm = {this.props.isOpened}/>
                             <Switch>
                                 <Route exact path = '/movies' render = {() => (<Collection collection = {this.state.movieCollection} pathWay = 'movie' />)}/>
                                 <Route exact path = '/tvshows' render = {() => (<Collection collection = {this.state.showCollection} pathWay = 'tvshows'/>)}/>

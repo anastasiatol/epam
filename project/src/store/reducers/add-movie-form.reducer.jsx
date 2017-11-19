@@ -1,4 +1,5 @@
 const initialState = {
+    state: 'INITIAL',
     isOpened: false
 }
 
@@ -7,7 +8,7 @@ export function addMovieFormReducer (state = initialState, action) {
         case "CHANGE_ADD_MOVIE_FORM_STATE":
             return{
                 state,
-                isOpened : !isOpened
+                isOpened : !state.isOpened
             }
         default:
             return state;

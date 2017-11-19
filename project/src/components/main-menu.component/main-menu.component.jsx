@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import {addMovie} from './../../store/actions/index.jsx'
 
 const Mainmenu = (props) => {
-    console.log (props)
         return (
             <div className = 'ak-mainmenu ak-mainmenuline_mainmenu'>
                 <div className = 'ak-mainmenu_item'
