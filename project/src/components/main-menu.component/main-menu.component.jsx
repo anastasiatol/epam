@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {addMovie} from './../../store/actions/index.jsx'
-
-const Mainmenu = (props) => {
+export const Mainmenu = (props) => {
         return (
             <div className = 'ak-mainmenu ak-mainmenuline_mainmenu'>
                 <div className = 'ak-mainmenu_item'
-                    onClick = {() => {props.addMovie()}}
+                    onClick = {() => {props.addMovieFormHide()}}
                 >
                     Add movie                
                 </div>
@@ -23,17 +21,3 @@ const Mainmenu = (props) => {
             </div> 
         );
     }
-
-
-const mapStateToProps = (state) => {
-    const isOpened = state.addMovieForm.isOpened;
-    
-    return { isOpened };    
-}
-
-const mapDispatchToProps = (dispatch) => ({
-    addMovie: () => dispatch(addMovie())
-    
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Mainmenu)

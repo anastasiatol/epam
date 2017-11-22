@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import { addMovieFormReducer } from './add-movie-form.reducer.jsx';
+import { layoutStateReducer } from './layout-state.reducer.jsx';
 
+ 
 export const appReducers = combineReducers ({
-    addMovieForm: addMovieFormReducer
+    layoutState: layoutStateReducer
 });

@@ -9,14 +9,14 @@ import {
     } from 'react-router-dom';
 import { connect } from 'react-redux'; 
 
-import { addMovie } from './../../store/actions/add-movie-form.actions.jsx'
+import { addMovieFormHide, hideSidebar } from './../../store/actions/index.jsx'
 import "./app.component.less";
 import { Sidebar } from '../../components/sidebar.component/sidebar.component.jsx';
-import  { Searchfield } from '../../components/search-field.component/search-field.component.jsx';
-import Mainmenu from '../../components/main-menu.component/main-menu.component.jsx'
+import { Searchfield } from '../../components/search-field.component/search-field.component.jsx';
+import { Mainmenu } from '../../components/main-menu.component/main-menu.component.jsx'
 import { AddMovieForm} from '../../components/add-movie-form.component/add-movie-form.component.jsx';
 import { Collection } from '../../components/collection.component/collection.component.jsx';
-import { Info } from '../../components/movie-info.component/movie-info.component.jsx'
+import { InfoPage } from '../../components/info-page.component/info-page.component.jsx'
 
 class App extends Component {
     constructor (props) {
@@ -24,10 +24,8 @@ class App extends Component {
         this.state = {
             movieCollection: [],
             showCollection: [],
-   //         addMovieIsOpen : false
-        };
+            };
         this.movieToFind = this.movieToFind.bind(this);
-    /*    this.addMovieOpen = this.addMovieOpen.bind(this);*/
     }
 
     movieToFind(e) {
@@ -36,15 +34,6 @@ class App extends Component {
           
         this.setState ({movieCollection: filteredMovies}); 
     }
-
-
-    /*addMovieOpen() {
-        if (this.state.addMovieIsOpen) {
-            this.setState({addMovieIsOpen : false});
-        } else {
-            this.setState({addMovieIsOpen : true});
-        }
-    }*/
 
     componentWillMount(){
         axios.get('https://api.themoviedb.org/3/discover/movie?api_key=4ca6d3d62547a54fe12460c06f138516&&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=2')
@@ -61,17 +50,17 @@ class App extends Component {
         return (
             <Router>
                 <div className ='ak-container'>
-                    <Sidebar />
+                    <Sidebar sidebarStateIsOpened = {this.props.sidebarStateIsOpened} hideSidebar = {this.props.hideSidebar.bind(this)}/>
                     <div className ='ak-maininformation ak-container_maininformation'>
                         <div className ='ak-mainmenuline ak-maininformation_mainmenuline'> 
                             <Searchfield movieToFind = {this.movieToFind}/>
-                            <Mainmenu />
-                            <AddMovieForm isOpenedAddMovieForm = {this.props.isOpened}/>
+                            <Mainmenu addMovieFormHide = {this.props.addMovieFormHide.bind(this)}/>
+                            <AddMovieForm addMovieFormIsOpened = {this.props.addMovieFormIsOpened}/>
                             <Switch>
                                 <Route exact path = '/movies' render = {() => (<Collection collection = {this.state.movieCollection} pathWay = 'movie' />)}/>
                                 <Route exact path = '/tvshows' render = {() => (<Collection collection = {this.state.showCollection} pathWay = 'tvshows'/>)}/>
-                                <Route path='/movie/:id' component={Info}/>
-                                <Route path='/tvshows/:id' component={Info}/>
+                                <Route path='/movie/:id' render={(props)=> <InfoPage collection={this.state.movieCollection}  pathWay = 'movie' id = {props.match.params.id}/>}/>
+                                <Route path='/tvshows/:id' render={(props)=> <InfoPage collection={this.state.showCollection} pathWay = 'tvshows'/>}/>
                             </Switch> 
                         </div>
                     </div>    
@@ -82,14 +71,16 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const isOpened = state.addMovieForm.isOpened;
+    const addMovieFormIsOpened = state.layoutState.addMovieFormIsOpened;
+    const sidebarStateIsOpened = state.layoutState.sidebarStateIsOpened;
     
-    return ({ isOpened });
+    return ({ addMovieFormIsOpened , sidebarStateIsOpened });
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    addMovie: () => dispatch(addMovie())
-
+    addMovieFormHide: () => dispatch(addMovieFormHide()),
+    hideSidebar: () => dispatch(hideSidebar()),
+   
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

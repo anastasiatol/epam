@@ -74,7 +74,7 @@ export class AddMovieForm extends Component {
 
     render() {
         return (
-            <form className = {this.props.isOpenedAddMovieForm? 'ak-addmovieform ak-addmovieform__flex ak-maininformation_addmovieform': 'ak-addmovieform ak-addmovieform__none ak-maininformation_addmovieform'} 
+            <form className = {this.props.addMovieFormIsOpened? 'ak-addmovieform ak-addmovieform__flex ak-maininformation_addmovieform': 'ak-addmovieform ak-addmovieform__none ak-maininformation_addmovieform'} 
                 action = '' 
                 method = ''
                 >
