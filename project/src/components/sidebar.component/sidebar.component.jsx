@@ -7,7 +7,6 @@ import {
     } from 'react-router-dom'
 import { connect } from 'react-redux'; 
 
-import {hideSidebar} from './../../store/actions/index.jsx'
 import "./sidebar.component.less";
 //import './../../shared/font-awesome/css/font-awesome.min.css'
 

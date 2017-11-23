@@ -8,8 +8,6 @@ import {
     } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { getInformationFromServer } from './../../store/actions/index.jsx'
-
 import {ItemCollection} from './../item-collection.component/item-collection.component.jsx'
 
 export class Collection extends Component {

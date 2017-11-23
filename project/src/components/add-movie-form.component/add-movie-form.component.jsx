@@ -3,7 +3,7 @@ import "./add-movie-form.component.less";
 
 import { connect } from 'react-redux'; 
 
-import { addMovieFormHide, hideSidebar, getInformationFromServer, addMovie } from './../../store/actions/index.jsx'
+import { addMovieFormHide, hideSidebar, getInformationFromServer, addMovie } from './../../store/actions/index.js'
 
 class AddMovieForm extends Component {
 
