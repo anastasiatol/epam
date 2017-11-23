@@ -1,13 +1,11 @@
-export function addMovieFormHide (payload) {
+export function addMovieFormHide () {
     return {
         type: "CHANGE_ADD_MOVIE_FORM_STATE",
-        payload
     }
 }
 
-export function  hideSidebar (payload) {
+export function  hideSidebar () {
     return {
         type: "CHANGE_SIDEBAR_STATE",
-        payload
     }
 }

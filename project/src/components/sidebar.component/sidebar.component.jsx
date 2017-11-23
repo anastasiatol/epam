@@ -8,49 +8,13 @@ import {
 import { connect } from 'react-redux'; 
 
 import {hideSidebar} from './../../store/actions/index.jsx'
+import "./sidebar.component.less";
+//import './../../shared/font-awesome/css/font-awesome.min.css'
 
 export class Sidebar extends Component {
 
     constructor(props) {
         super(props);
-      
-/*        this.opened = 
-            {
-                containerClass: 'ak-sidebar ak-container_sidebar',
-                logoClass: 'ak-sidebar_logo__big',
-                itemnameClass: 'ak-sidebar_itemname'    
-            }   
-        this.closed = 
-        {
-            containerClass: 'ak-sidebar ak-container_sidebar ak-container_sidebar__nosidebar',
-            logoClass: 'ak-sidebar_logo__big ak-sidebar_logo__big__nosidebar',
-            itemnameClass: 'ak-sidebar_itemname ak-sidebar_itemname__nosidebar'    
-        }
-        this.state = 
-        {
-            containerClass: 'ak-sidebar ak-container_sidebar',
-            logoClass: 'ak-sidebar_logo__big',
-            itemnameClass: 'ak-sidebar_itemname'    
-        } 
-        this.isOpened = true
-    }
-
-    hideSidebar() {
-        if (this.isOpened) {
-            this.setState ({
-                containerClass : this.closed.containerClass,
-                logoClass : this.closed.logoClass,
-                itemnameClass : this.closed.itemnameClass
-            });
-            this.isOpened = false
-        } else {
-            this.setState ({
-                containerClass : this.opened.containerClass,
-                logoClass : this.opened.logoClass,
-                itemnameClass : this.opened.itemnameClass
-            });
-            this.isOpened = true;
-        }*/
     }
 
     render() {
@@ -58,8 +22,7 @@ export class Sidebar extends Component {
             <div className = {this.props.sidebarStateIsOpened? 'ak-sidebar ak-container_sidebar' : 'ak-sidebar ak-container_sidebar ak-container_sidebar__nosidebar'}>
                 <div className = 'ak-sidebar_item'>
                     <div className = 'ak-sidebar_icon' 
-                        onClick = {() => {this.props.hideSidebar()}}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    >
+                        onClick = {() => {this.props.hideSidebar()}}>
                         МЕ
                     </div>
                     <div className = {this.props.sidebarStateIsOpened? 'ak-sidebar_logo__big': 'ak-sidebar_logo__big ak-sidebar_logo__big__nosidebar'}>

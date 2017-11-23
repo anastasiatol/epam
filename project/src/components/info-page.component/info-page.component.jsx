@@ -27,7 +27,7 @@ export class InfoPage extends Component {
     }
 
     render() {
-        console.log(this.props.id)
+        console.log('props', this.props.id)
         return (
             <div className = 'ak-maininformation_info ak-info'>
                 <div className = 'ak-info_poster-overview' >   

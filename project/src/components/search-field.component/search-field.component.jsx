@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './search-field.component.less'
 
 export class Searchfield extends Component {
     
