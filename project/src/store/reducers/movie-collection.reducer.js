@@ -7,7 +7,7 @@ export function movieCollectionReducer (state = initialState, action) {
     switch (action.type) {
         case 'GET_MOVIES_FROM_SERVER':
             return {
-
+                ...state,
                 movieCollection: action.payload
 
 
@@ -15,8 +15,8 @@ export function movieCollectionReducer (state = initialState, action) {
 
         case 'ADD_MOVIE':
             return {
-
-                movieCollection: action.payload
+                ...state,
+                movieCollection: [...state.movieCollection, action.payload]
 
             };
 

@@ -7,7 +7,7 @@ export function tvShowCollectionReducer (state = initialState, action) {
     switch (action.type) {
         case 'GET_TVSHOW_FROM_SERVER':
             return {
-
+                ...state,
                 showCollection: action.payload
 
 
@@ -15,8 +15,8 @@ export function tvShowCollectionReducer (state = initialState, action) {
 
         case 'ADD_TVSHOW':
             return {
-
-                showCollection: action.payload
+                ...state,
+                showCollection: [...state.showCollection, action.payload]
 
             };
 
