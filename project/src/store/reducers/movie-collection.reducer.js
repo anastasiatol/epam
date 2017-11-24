@@ -5,19 +5,16 @@ var initialState = {
 
 export function movieCollectionReducer (state = initialState, action) {
     switch (action.type) {
-        case 'GET_MOVIES_FROM_SERVER':
+        case 'MOVIES_FROM_SERVER':
             return {
                 ...state,
                 movieCollection: action.payload
-
-
             };
 
         case 'ADD_MOVIE':
             return {
                 ...state,
                 movieCollection: [...state.movieCollection, action.payload]
-
             };
 
         default:

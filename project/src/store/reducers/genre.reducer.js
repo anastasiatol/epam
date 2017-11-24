@@ -5,7 +5,7 @@ var initialState = {
 
 export function genreReducer (state = initialState, action) {
     switch (action.type) {
-        case 'GET_GENRE_FROM_SERVER':
+        case 'GET_GENRE':
             return {
                 ...state,
                 genre: action.payload
@@ -13,12 +13,6 @@ export function genreReducer (state = initialState, action) {
 
             };
 
-        case 'ADD_GENRE':
-            return {
-                ...state,
-                genre: [...state.genre, action.payload]
-
-            };
 
         default:
             return state;

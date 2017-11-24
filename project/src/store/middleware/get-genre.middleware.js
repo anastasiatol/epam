@@ -9,7 +9,7 @@ const getGenre = store => next => action => {
             let genre = response.data.genres;
 
             store.dispatch({
-                type: 'ADD_GENRE',
+                type: 'GET_GENRE',
                 payload: genre
             });
         });

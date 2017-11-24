@@ -9,7 +9,7 @@ const getTVShow = store => next => action => {
             let showCollection = response.data.results;
 
             store.dispatch({
-                type: 'ADD_TVSHOW',
+                type: 'TVSHOW_FROM_SERVER',
                 payload: showCollection
             });
         });

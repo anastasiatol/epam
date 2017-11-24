@@ -9,7 +9,7 @@ const getMovie = store => next => action => {
             let movieCollection = response.data.results;
 
             store.dispatch({
-                type: 'ADD_MOVIE',
+                type: 'MOVIES_FROM_SERVER',
                 payload: movieCollection
             });
         });

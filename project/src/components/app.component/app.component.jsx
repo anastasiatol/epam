@@ -28,6 +28,9 @@ class App extends Component {
            // genres: []
             };
         this.movieToFind = this.movieToFind.bind(this); 
+        this.props.getInformationFromServer ();
+        this.props.getTVshowsFromServer ();
+        this.props.getGenreFromServer ();
     }
 
     movieToFind(e) {
@@ -47,9 +50,7 @@ class App extends Component {
         .then(response => {
             this.setState({showCollection: response.data.results});
         });*/
-        this.props.getInformationFromServer ();
-        this.props.getTVshowsFromServer ();
-        this.props.getGenreFromServer ();
+        
 
 
     /*    axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=ed17cc3db4b89c8d4e968b98ff4f8266&language=en-US')
