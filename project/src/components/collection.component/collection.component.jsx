@@ -5,7 +5,10 @@ import {
     Route,
     NavLink,
     Switch
-    } from 'react-router-dom'
+    } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import {ItemCollection} from './../item-collection.component/item-collection.component.jsx'
 
 export class Collection extends Component {
 
@@ -20,17 +23,15 @@ export class Collection extends Component {
             {this.props.collection
                 .map((item, index) => {
                     return (
-                        <NavLink to = {`/${this.props.pathWay}/${item.id}`}
-                            key = {index}>
-                            <div className = {'ak-moviecollection_movie'}
-                                style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${item.poster_path})`}}
-                            >
-                            </div>
-                        </NavLink>
+                        <ItemCollection 
+                            pathWay = {this.props.pathWay} 
+                            item = {item}
+                            key = {index}
+                        />
                     )
                 })
             }
         </div> 
-        );
+        )
     }
 }

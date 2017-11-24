@@ -12,14 +12,24 @@ export class InfoPage extends Component {
 
     constructor(props) {  
         super(props);
-        this.currentEllement = {};
-        
+        this.state ={
+            currentEllement : {}
+        }
     }
     
+  /*  changeInfoPage (id) {
+        console.log(props);
+            this.props.collection.forEach(function(item) {
+                if (item.id === id) {
+                    this.setState({currentEllement : item})
+                }
+            }, this);
+        }*/
+
     componentWillMount() {
         this.props.collection.forEach(function(item) {
             if (item.id === +this.props.id) {
-                this.currentEllement = item
+                this.setState({currentEllement : item})
             }
         }, this);
 
@@ -27,29 +37,29 @@ export class InfoPage extends Component {
     }
 
     render() {
-        console.log(this.props.id)
+        console.log('props', this.props)
         return (
             <div className = 'ak-maininformation_info ak-info'>
                 <div className = 'ak-info_poster-overview' >   
                     <div className = 'ak-info_poster'
-                        style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${this.currentEllement.poster_path})`}}>
+                        style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${this.state.currentEllement.poster_path})`}}>
                     </div>
                     <div className = 'ak-info_name-overview'>
                         <div className = 'ak-info_name'>
-                            {this.currentEllement.title}
+                            {this.state.currentEllement.title}
                         </div>
                         <div className = 'ak-info_overview'>
-                            {this.currentEllement.overview}
-                            {this.currentEllement.overview}
-                            {this.currentEllement.overview}
-                            {this.currentEllement.overview}
-                            {this.currentEllement.overview}
-                            {this.currentEllement.overview}
-                            {this.currentEllement.overview}
-                            {this.currentEllement.overview}
-                            {this.currentEllement.overview}
-                            {this.currentEllement.overview}
-                            {this.currentEllement.overview}
+                            {this.state.currentEllement.overview}
+                            {this.state.currentEllement.overview}
+                            {this.state.currentEllement.overview}
+                            {this.state.currentEllement.overview}
+                            {this.state.currentEllement.overview}
+                            {this.state.currentEllement.overview}
+                            {this.state.currentEllement.overview}
+                            {this.state.currentEllement.overview}
+                            {this.state.currentEllement.overview}
+                            {this.state.currentEllement.overview}
+                            {this.state.currentEllement.overview}
                             
                         </div>
                     </div>
@@ -59,11 +69,11 @@ export class InfoPage extends Component {
                 <div className = 'ak-info_progess-scale-container'>
                     <div className = 'ak-info_progess-scale-mini-container'>
                         Popularity
-                        <progress className = 'ak-info_progress-scale ak-info_progress-scale__yellow' value = {this.props.collection[1].popularity} max={200}/>
+                        <progress className = 'ak-info_progress-scale ak-info_progress-scale__yellow' value = {this.state.currentEllement.popularity} max={200}/>
                     </div>
                     <div className = 'ak-info_progess-scale-mini-container'>
                         Vote average
-                        <progress className = 'ak-info_progress-scale ak-info_progress-scale__green' value = {this.currentEllement.vote_average} max={10}/>
+                        <progress className = 'ak-info_progress-scale ak-info_progress-scale__green' value = {this.state.currentEllement.vote_average} max={10}/>
                     </div>
                 </div>
                 <div className = 'ak-info_recommended ak-recommended'>
@@ -75,10 +85,11 @@ export class InfoPage extends Component {
                             .map((item, index) => {
                                 return (
                                     <NavLink to = {`/${this.props.pathWay}/${item.id}`}
-                                    key = {index}>
+                                    key = {index} id = {item.id}>
                                         <div className = 'ak-recommended_movie'
                                             key= {index}
                                             style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${item.poster_path})`}}
+                                            //onClick = {this.changeInfoPage}
                                         />
                                     </NavLink>
                                 )}

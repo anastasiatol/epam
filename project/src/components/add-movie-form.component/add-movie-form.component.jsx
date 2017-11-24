@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
 import "./add-movie-form.component.less";
 
-export class AddMovieForm extends Component {
+import { connect } from 'react-redux'; 
+
+import { addMovieFormHide, hideSidebar, getInformationFromServer, addMovie } from './../../store/actions/index.js'
+
+class AddMovieForm extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             title: '',
             overview: '',
-            genre: {
-                Action: false,
-                Adventure: false,
-                Thriller: false,
-                Comedy: false,
-                Fantasy: false,
-                Drama: false,
-                Horror: false,
-                Criminal: false,
-                War: false,
-                Documentary: false,
-            },
+            genre_ids: [],
             adult: false,
             isDisable: true,
             poster_path: ''
@@ -30,6 +23,7 @@ export class AddMovieForm extends Component {
         this.onOverviewChange = this.onOverviewChange.bind(this);
         this.addGenre = this.addGenre.bind(this);
         this.isAdult = this.isAdult.bind(this);
+        this.cancel = this.cancel.bind(this);
 
     }
  
@@ -53,14 +47,26 @@ export class AddMovieForm extends Component {
     }
     
     addGenre(e) {
+        let genreID = 0;        
         if (e.target.type === 'checkbox') {
+            this.props.genres.forEach(function(element) {
+                if (element.name === e.target.value) {
+                    genreID = element.id;
+                }
+            }, this);
             console.log (`${e.target.value}`);
-            if (this.state.genre[e.target.value]) {
-    //            this.setState({genre: { `${e.target.value} : true});
+
+            if (this.state.genre_ids.indexOf(genreID) === -1) {
+                this.setState({genre_ids: this.state.genre_ids.push(genreID)})
             } else {
-    //            this.setState({genre[e.target.value] : true});
-            }
+                for (let i =0; i<this.state.genre_idsgenre_ids.length; i++) {
+                    if (e.target.value === this.state.genre_ids[i]){
+                        this.state.genre_ids.splice(i,i);
+                    }
+                }  
+            } 
         }
+        console.log(this.state.genre_ids)
     }
 
     isAdult(e) {
@@ -72,12 +78,20 @@ export class AddMovieForm extends Component {
         }
     }
 
+   cancel() {
+        this.setState  ({
+            title: '',
+            overview: '',
+            genre_ids: [],
+            adult: false,
+            isDisable: true,
+            poster_path: ''
+        })
+    }
+
     render() {
         return (
-            <form className = {this.props.addMovieFormIsOpened? 'ak-addmovieform ak-addmovieform__flex ak-maininformation_addmovieform': 'ak-addmovieform ak-addmovieform__none ak-maininformation_addmovieform'} 
-                action = '' 
-                method = ''
-                >
+            <form className = {this.props.addMovieFormIsOpened? 'ak-addmovieform ak-addmovieform__flex ak-maininformation_addmovieform': 'ak-addmovieform ak-addmovieform__none ak-maininformation_addmovieform'}>
                 <div className = 'ak-addmovieform_innerblock'>
                     <div className = 'ak-addmovieform_label'>   
                         Add movie
@@ -191,10 +205,10 @@ export class AddMovieForm extends Component {
                                 <input type='checkbox' 
                                     className = 'ak-addmovieform_checkboxbtn' 
                                     name = 'Genre' 
-                                    value='Criminal' 
+                                    value='Crime' 
                                 />
                                 <label className='ak-addmovieform_checkbox'>
-                                    Criminal
+                                    Crime
                                 </label>
                             </p>
                             <p>
@@ -240,14 +254,13 @@ export class AddMovieForm extends Component {
                         Upload one poster as minimum
                     </div>
                     <button className = 'ak-addmovieform_button ak-addmovieform_button__add'
-                        type = 'submit'
                         disabled = {this.state.isDisable}
-                        
+                        onClick = {this.props.addMovie}
                         >
                         Add
                     </button>
                     <button className = 'ak-addmovieform_button ak-addmovieform_button__cancel'
-                        type = 'reset'>
+                        onClick = {this.cancel}>
                         Cancel
                     </button>
                 </div>
@@ -255,3 +268,18 @@ export class AddMovieForm extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    const addMovieFormIsOpened = state.layoutState.addMovieFormIsOpened;
+   
+ 
+    
+    return ({ addMovieFormIsOpened });
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    addMovieFormHide: () => dispatch(addMovieFormHide()),
+    addMovie: () => dispatch(addMovie()) 
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddMovieForm)

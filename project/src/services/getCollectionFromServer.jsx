@@ -1,9 +1,15 @@
 import axios from 'axios';
 
-export const axios.get(source) 
-    .then(response =>  {
-        this.movieCollectionFull = response.data
-    })
-    .catch(e => {
-        console.log (e);
-    })
+export class getCollectionFromServer {
+    getData(source) {
+        return (
+            axios.get(source)
+                .then( response => {
+                    return(response.data);
+                })
+                .catch( e => {
+                    console.log(e);
+            }))
+        }
+    }
+
