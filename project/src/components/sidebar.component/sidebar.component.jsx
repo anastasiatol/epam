@@ -48,13 +48,14 @@ export class Sidebar extends Component {
                 </div>  
 
                 <div className = 'ak-sidebar_item' >
-                    <div className = 'ak-sidebar_icon'>
+                    <NavLink to = '/mylibrary' className = 'ak-sidebar_icon'>
                         3
-                    </div>
-                    <div className = {this.props.sidebarStateIsOpened? 'ak-sidebar_itemname': 'ak-sidebar_itemname ak-sidebar_itemname__nosidebar'}>
+                    </NavLink>
+                    <NavLink to = '/mylibrary' className = {this.props.sidebarStateIsOpened? 'ak-sidebar_itemname': 'ak-sidebar_itemname ak-sidebar_itemname__nosidebar'}>
                         My Library
-                    </div>
+                    </NavLink>
                 </div> 
+
                 <div className = 'ak-sidebar_item' >
                     <div className = 'ak-sidebar_icon'>
                         4

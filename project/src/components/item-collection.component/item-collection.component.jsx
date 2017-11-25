@@ -14,7 +14,6 @@ export class ItemCollection extends Component {
         this.state = {
             smallInfo : false
         }
-        
     }
 
     openSmallInfo() {
@@ -27,32 +26,36 @@ export class ItemCollection extends Component {
 
     render() {
         return (
-            <NavLink to = {`/${this.props.pathWay}/${this.props.item.id}`}>
-            
-                <div className = 'ak-moviecollection_movie ak-movie'
-                    style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${this.props.item.poster_path})`}}>
-                    <div className = 'ak-movie_mask'>
-                        <div className = 'ak-movie_button-container'>
-                            <div className = 'ak-movie_button ak-movie_button__info'
-                                onMouseOver = {() => this.openSmallInfo()}
-                                onMouseOut = {() => this.closeSmallInfo()}
-                                >
+            <div className = 'ak-moviecollection_movie ak-movie'
+                style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${this.props.item.poster_path})`}}>
+                <div className = 'ak-movie_mask'>
+                    <div className = 'ak-movie_button-container'>
+                        <div className = 'ak-movie_button ak-movie_button__info'
+                            onMouseOver = {() => this.openSmallInfo()}
+                            onMouseOut = {() => this.closeSmallInfo()}
+                            >
                                 i
-                                <div className = {(this.state.smallInfo)?'ak-movie_small-info':'ak-movie_small-info ak-movie_small-info__noinfo'}>
-                                    {this.props.item.overview}
-                                </div>
-                            </div>
-                            <div className = 'ak-movie_button ak-movie_button__addToCollection'
-                                onClick = {() => alert('add')}>
-                                add
+                            <div className = {(this.state.smallInfo)?'ak-movie_small-info':'ak-movie_small-info ak-movie_small-info__noinfo'}>
+                                {this.props.item.overview}
                             </div>
                         </div>
-                        <div className = 'ak-movie_titile'>
+                        <div className = 'ak-movie_button ak-movie_button__addToCollection'
+                            onClick = {() => this.props.addToMyLibrary(this.props.item)}>
+                            add
+                        </div>
+                        <div className = 'ak-movie_button ak-movie_button__delFromCollection'
+                            onClick = {() => this.props.deleteFromMyLibrary(item)}>
+                            del
+                        </div>
+                    </div>
+                    <NavLink to = {`/${this.props.pathWay}/${this.props.item.id}`}
+                        className = 'ak-movie_link'>
+                        <div className = 'ak-movie_title'>
                             {this.props.item.title}
                         </div>
-                   </div>
+                    </NavLink>
                 </div>
-            </NavLink>
+            </div>
         )
     }
 }

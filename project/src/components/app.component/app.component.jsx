@@ -9,7 +9,17 @@ import {
     } from 'react-router-dom';
 import { connect } from 'react-redux'; 
 
-import { addMovieFormHide, hideSidebar, getInformationFromServer, addMovie, getTVshowsFromServer , getGenreFromServer} from './../../store/actions/index.js'
+import { 
+    addMovieFormHide, 
+    hideSidebar, 
+    getInformationFromServer, 
+    addMovie, 
+    getTVshowsFromServer , 
+    getGenreFromServer, 
+    getMyLibrary, 
+    addToMyLibrary,
+    deleteFromMyLibrary
+} from './../../store/actions/index.js'
 import "./app.component.less";
 import { Sidebar } from '../../components/sidebar.component/sidebar.component.jsx';
 import { Searchfield } from '../../components/search-field.component/search-field.component.jsx';
@@ -22,15 +32,12 @@ import { InfoPage } from '../../components/info-page.component/info-page.compone
 class App extends Component {
     constructor (props) {
         super (props);
-        this.state = {
-           // movieCollection: [],
-           // showCollection: [],
-           // genres: []
-            };
+
         this.movieToFind = this.movieToFind.bind(this); 
         this.props.getInformationFromServer ();
         this.props.getTVshowsFromServer ();
         this.props.getGenreFromServer ();
+        this.props.getMyLibrary ();
     }
 
     movieToFind(e) {
@@ -38,26 +45,6 @@ class App extends Component {
             return item.title.toLowerCase().indexOf(e.toLowerCase()) !== -1});
           
         this.setState ({movieCollection: filteredMovies}); 
-    }
-
-    componentWillMount(){
-    /*    axios.get('https://api.themoviedb.org/3/discover/movie?api_key=4ca6d3d62547a54fe12460c06f138516&&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=2')
-        .then(response => {
-            this.setState({movieCollection: response.data.results})
-        });  */
-        
-   /*     axios.get('https://api.themoviedb.org/3/tv/popular?api_key=4ca6d3d62547a54fe12460c06f138516&language=en-US&page=1')
-        .then(response => {
-            this.setState({showCollection: response.data.results});
-        });*/
-        
-
-
-    /*    axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=ed17cc3db4b89c8d4e968b98ff4f8266&language=en-US')
-        .then(response => {
-            this.setState({genres: response.data.genres});
-            console.log(this.state.genres)
-        })*/
     }
     
     render() {
@@ -72,8 +59,9 @@ class App extends Component {
                             <AddMovieForm />
                         </div>    
                         <Switch>
-                            <Route exact path = '/movies' render = {() => (<Collection collection = {this.props.movieCollection} pathWay = 'movie' />)}/>
-                            <Route exact path = '/tvshows' render = {() => (<Collection collection = {this.props.showCollection} pathWay = 'tvshows'/>)}/>
+                            <Route exact path = '/movies' render = {() => (<Collection collection = {this.props.movieCollection} addToMyLibrary = {this.props.addToMyLibrary.bind(this)} pathWay = 'movie' />)}/>
+                            <Route exact path = '/tvshows' render = {() => (<Collection collection = {this.props.showCollection} addToMyLibrary = {this.props.addToMyLibrary.bind(this)} pathWay = 'tvshows'/>)}/>
+                            <Route exact path = '/mylibrary' render = {() => (<Collection collection = {this.props.mylibrary} pathWay = 'mylibrary'/>)}/>
                             <Route path='/movie/:id' render={(props)=> <InfoPage collection={this.props.movieCollection}  pathWay = 'movie' id = {props.match.params.id}/>}/>
                             <Route path='/tvshows/:id' render={(props)=> <InfoPage collection={this.props.showCollection} pathWay = 'tvshows' id = {props.match.params.id}/>}/>
                         </Switch> 
@@ -90,10 +78,9 @@ const mapStateToProps = (state) => {
     var movieCollection = state.movieCollection.movieCollection;
     var showCollection = state.tvShowCollection.showCollection;
     const genre = state.genre.genre;
-
-
+    var mylibrary = state.myLibraryCollection.myLibraryCollection;
     
-    return ({ addMovieFormIsOpened , sidebarStateIsOpened, movieCollection, showCollection, genre});
+    return ({ addMovieFormIsOpened , sidebarStateIsOpened, movieCollection, showCollection, genre, mylibrary});
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -101,8 +88,10 @@ const mapDispatchToProps = (dispatch) => ({
     hideSidebar: () => dispatch(hideSidebar()),
     getInformationFromServer: () => dispatch(getInformationFromServer()),
     getTVshowsFromServer: () => dispatch(getTVshowsFromServer()),
-    getGenreFromServer: () => dispatch(getGenreFromServer())
-
+    getGenreFromServer: () => dispatch(getGenreFromServer()),
+    getMyLibrary: () => dispatch(getMyLibrary()),
+    addToMyLibrary: (item) => dispatch(addToMyLibrary(item)),
+    deleteFromMyLibrary: (item) => dispatch(deleteFromMyLibrary(item))
    
 })
 

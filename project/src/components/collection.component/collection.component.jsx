@@ -24,6 +24,7 @@ export class Collection extends Component {
                 .map((item, index) => {
                     return (
                         <ItemCollection 
+                            addToMyLibrary = {this.props.addToMyLibrary}
                             pathWay = {this.props.pathWay} 
                             item = {item}
                             key = {index}
