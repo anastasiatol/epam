@@ -13,12 +13,6 @@ export const Mainmenu = (props) => {
                 <div className = 'ak-mainmenu_item'>
                     About           
                 </div>
-                <div className = 'ak-mainmenu_item'>
-                    Pricing                
-                </div>
-                <div className = 'ak-mainmenu_item'>
-                    Blog                
-                </div>
             </div> 
         );
     }

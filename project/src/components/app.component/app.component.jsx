@@ -69,14 +69,14 @@ class App extends Component {
                         <div className ='ak-mainmenuline ak-maininformation_mainmenuline'> 
                             <Searchfield movieToFind = {this.movieToFind}/>
                             <Mainmenu addMovieFormHide = {this.props.addMovieFormHide.bind(this)}/>
-                            <AddMovieForm genres = {this.props.genres}/>
-                            <Switch>
-                                <Route exact path = '/movies' render = {() => (<Collection collection = {this.props.movieCollection} pathWay = 'movie' />)}/>
-                                <Route exact path = '/tvshows' render = {() => (<Collection collection = {this.props.showCollection} pathWay = 'tvshows'/>)}/>
-                                <Route path='/movie/:id' render={(props)=> <InfoPage collection={this.props.movieCollection}  pathWay = 'movie' id = {props.match.params.id}/>}/>
-                                <Route path='/tvshows/:id' render={(props)=> <InfoPage collection={this.props.showCollection} pathWay = 'tvshows' id = {props.match.params.id}/>}/>
-                            </Switch> 
-                        </div>
+                            <AddMovieForm />
+                        </div>    
+                        <Switch>
+                            <Route exact path = '/movies' render = {() => (<Collection collection = {this.props.movieCollection} pathWay = 'movie' />)}/>
+                            <Route exact path = '/tvshows' render = {() => (<Collection collection = {this.props.showCollection} pathWay = 'tvshows'/>)}/>
+                            <Route path='/movie/:id' render={(props)=> <InfoPage collection={this.props.movieCollection}  pathWay = 'movie' id = {props.match.params.id}/>}/>
+                            <Route path='/tvshows/:id' render={(props)=> <InfoPage collection={this.props.showCollection} pathWay = 'tvshows' id = {props.match.params.id}/>}/>
+                        </Switch> 
                     </div>    
                 </div>
             </Router>

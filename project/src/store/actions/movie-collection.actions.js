@@ -10,3 +10,10 @@ export function addMovie (payload) {
         payload
     };
 }
+
+export function addMyMovie (payload) {
+    return {
+        type : 'ADD_MY_MOVIE',
+        payload
+    };
+}

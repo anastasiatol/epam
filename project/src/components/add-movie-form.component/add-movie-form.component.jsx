@@ -3,7 +3,7 @@ import "./add-movie-form.component.less";
 
 import { connect } from 'react-redux'; 
 
-import { addMovieFormHide, hideSidebar, getInformationFromServer, addMovie } from './../../store/actions/index.js'
+import { addMovieFormHide, hideSidebar, getInformationFromServer, addMyMovie } from './../../store/actions/index.js'
 
 class AddMovieForm extends Component {
 
@@ -49,7 +49,7 @@ class AddMovieForm extends Component {
     addGenre(e) {
         let genreID = 0;        
         if (e.target.type === 'checkbox') {
-            this.props.genres.forEach(function(element) {
+            this.props.genre.forEach(function(element) {
                 if (element.name === e.target.value) {
                     genreID = element.id;
                 }
@@ -59,8 +59,8 @@ class AddMovieForm extends Component {
             if (this.state.genre_ids.indexOf(genreID) === -1) {
                 this.setState({genre_ids: this.state.genre_ids.push(genreID)})
             } else {
-                for (let i =0; i<this.state.genre_idsgenre_ids.length; i++) {
-                    if (e.target.value === this.state.genre_ids[i]){
+                for (let i =0; i<this.state.genre_ids.length; i++) {
+                    if (e.target.value === this.state.genre_ids[i]) {
                         this.state.genre_ids.splice(i,i);
                     }
                 }  
@@ -84,14 +84,28 @@ class AddMovieForm extends Component {
             overview: '',
             genre_ids: [],
             adult: false,
-            isDisable: true,
-            poster_path: ''
+            poster_path: '',
         })
+        this.props.addMovieFormHide();
+    }
+
+    saveMovie() {
+        let newMovie = {
+            title : this.state.title,
+            overview : this.state.overview,
+            genre_ids : this.state.genre_ids,
+            adult: this.state.adult,
+            poster_path: this.state.poster_path,
+            id: Math.random()*(1000-1)            
+        }
+        this.props.addMyMovie (newMovie);
+        this.props.addMovieFormHide();
     }
 
     render() {
         return (
-            <form className = {this.props.addMovieFormIsOpened? 'ak-addmovieform ak-addmovieform__flex ak-maininformation_addmovieform': 'ak-addmovieform ak-addmovieform__none ak-maininformation_addmovieform'}>
+            <form className = {this.props.addMovieFormIsOpened? 'ak-addmovieform ak-addmovieform__flex ak-maininformation_addmovieform': 'ak-addmovieform ak-addmovieform__none ak-maininformation_addmovieform'}
+                onSubmit = {() => this.saveMovie ()}>  
                 <div className = 'ak-addmovieform_innerblock'>
                     <div className = 'ak-addmovieform_label'>   
                         Add movie
@@ -123,7 +137,7 @@ class AddMovieForm extends Component {
                     </textarea>
                 </div>
                 <div className = 'ak-addmovieform_innerblock'>
-                <div className = 'ak-addmovieform_label'>
+                {/*<div className = 'ak-addmovieform_label'>
                     Genre
                 </div>
                     <div className = 'ak-addmovieform_checkboxbtncontainer'
@@ -235,7 +249,7 @@ class AddMovieForm extends Component {
                     </div>
                     <div className = 'ak-addmovieform_errormessage'>
                         Genre is required
-                    </div>
+        </div>*/}
                     <input type='checkbox' 
                         className = 'ak-addmovieform_checkboxbtn' 
                         value='Adult' 
@@ -246,21 +260,22 @@ class AddMovieForm extends Component {
                     </label>
                 </div>
                 <div className = 'ak-addmovieform_innerblock'>
-                    <input className = 'ak-addmovieform_uploadimg'
+            {/*        <input className = 'ak-addmovieform_uploadimg'
                         type = 'file'
                         accept = 'image/*'
                     />
                     <div className = 'ak-addmovieform_errormessage'>
                         Upload one poster as minimum
-                    </div>
+                    </div>*/}
                     <button className = 'ak-addmovieform_button ak-addmovieform_button__add'
                         disabled = {this.state.isDisable}
-                        onClick = {this.props.addMovie}
+                        type = 'submit'
                         >
                         Add
                     </button>
                     <button className = 'ak-addmovieform_button ak-addmovieform_button__cancel'
-                        onClick = {this.cancel}>
+                        onClick = {this.cancel}
+                        type = 'reset'>
                         Cancel
                     </button>
                 </div>
@@ -271,15 +286,15 @@ class AddMovieForm extends Component {
 
 const mapStateToProps = (state) => {
     const addMovieFormIsOpened = state.layoutState.addMovieFormIsOpened;
-   
+    const genre = state.genre.genre;
  
     
-    return ({ addMovieFormIsOpened });
+    return ({ addMovieFormIsOpened, genre});
 }
 
 const mapDispatchToProps = (dispatch) => ({
     addMovieFormHide: () => dispatch(addMovieFormHide()),
-    addMovie: () => dispatch(addMovie()) 
+    addMyMovie: (newMovie) => dispatch(addMyMovie(newMovie)) 
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddMovieForm)
