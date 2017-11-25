@@ -10,8 +10,8 @@ const getMovie = store => next => action => {
             let localStorageMyMoviesSTR = localStorage.getItem('movies');
             if (localStorageMyMoviesSTR) {
                 var localStorageMyMovies = JSON.parse(localStorageMyMoviesSTR);
+                movieCollection = movieCollection.concat(localStorageMyMovies);
             }
-            movieCollection = movieCollection.concat(localStorageMyMovies);
 
             store.dispatch({
                 type: 'MOVIES_FROM_SERVER',
