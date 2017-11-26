@@ -42,7 +42,7 @@ export function myLibraryCollectionReducer (state = initialState, action) {
             let newlocalStorageMyLibrarySTR = JSON.stringify(newlocalStorageMyLibrary);
             localStorage.setItem('mylibrary', newlocalStorageMyLibrarySTR);
 
-            let newMyLibraryCollection = state.myLibraryCollection.filter(v => v !== action.payload);
+            let newMyLibraryCollection = state.myLibraryCollection.filter(v => v.id !== action.payload.id);
             return {
                 ...state,
                 myLibraryCollection: newMyLibraryCollection
