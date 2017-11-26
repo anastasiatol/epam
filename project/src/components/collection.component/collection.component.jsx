@@ -22,12 +22,19 @@ export class Collection extends Component {
             <div className = 'ak-moviecollection ak-maininformation_moviecollection'>    
             {this.props.collection
                 .map((item, index) => {
+                    if (this.props.itemIsInLibrary(item)) {
+                        var isInLibrary = true
+                    } else {
+                        var isInLibrary = false
+                    }
                     return (
                         <ItemCollection 
                             addToMyLibrary = {this.props.addToMyLibrary}
+                            deleteFromMyLibrary = {this.props.deleteFromMyLibrary}
                             pathWay = {this.props.pathWay} 
                             item = {item}
                             key = {index}
+                            isInLibrary = {isInLibrary}
                         />
                     )
                 })

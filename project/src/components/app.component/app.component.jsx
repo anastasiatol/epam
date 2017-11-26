@@ -33,7 +33,9 @@ class App extends Component {
     constructor (props) {
         super (props);
 
-        this.movieToFind = this.movieToFind.bind(this); 
+        this.movieToFind = this.movieToFind.bind(this);
+        this.itemIsInLibrary = this.itemIsInLibrary.bind(this);
+
         this.props.getInformationFromServer ();
         this.props.getTVshowsFromServer ();
         this.props.getGenreFromServer ();
@@ -47,6 +49,14 @@ class App extends Component {
         this.setState ({movieCollection: filteredMovies}); 
     }
     
+    itemIsInLibrary(e) {
+        for (let i=0; i<this.props.mylibrary.length; i++) {
+            if (e.id === this.props.mylibrary[i].id) return true;
+        }
+        return false; 
+    }
+
+
     render() {
         return (
             <Router>
@@ -59,9 +69,30 @@ class App extends Component {
                             <AddMovieForm />
                         </div>    
                         <Switch>
-                            <Route exact path = '/movies' render = {() => (<Collection collection = {this.props.movieCollection} addToMyLibrary = {this.props.addToMyLibrary.bind(this)} pathWay = 'movie' />)}/>
-                            <Route exact path = '/tvshows' render = {() => (<Collection collection = {this.props.showCollection} addToMyLibrary = {this.props.addToMyLibrary.bind(this)} pathWay = 'tvshows'/>)}/>
-                            <Route exact path = '/mylibrary' render = {() => (<Collection collection = {this.props.mylibrary} pathWay = 'mylibrary'/>)}/>
+                            <Route exact path = '/movies' 
+                                render = {() => (<Collection 
+                                    collection = {this.props.movieCollection} 
+                                    addToMyLibrary = {this.props.addToMyLibrary.bind(this)}
+                                    deleteFromMyLibrary = {this.props.deleteFromMyLibrary.bind(this)}
+                                    itemIsInLibrary = {this.itemIsInLibrary.bind(this)}    
+                                    pathWay = 'movie' />)}
+                            />
+                            <Route exact path = '/tvshows' 
+                                render = {() => (<Collection 
+                                    collection = {this.props.showCollection} 
+                                    addToMyLibrary = {this.props.addToMyLibrary.bind(this)}
+                                    deleteFromMyLibrary = {this.props.deleteFromMyLibrary.bind(this)}
+                                    itemIsInLibrary = {this.itemIsInLibrary.bind(this)} 
+                                    pathWay = 'tvshows'/>)}
+                            />
+                            <Route exact path = '/mylibrary' 
+                                render = {() => (<Collection 
+                                    collection = {this.props.mylibrary}
+                                    addToMyLibrary = {this.props.addToMyLibrary.bind(this)}
+                                    deleteFromMyLibrary = {this.props.deleteFromMyLibrary.bind(this)}
+                                    itemIsInLibrary = {this.itemIsInLibrary.bind(this)} 
+                                    pathWay = 'mylibrary'/>)}
+                                    />
                             <Route path='/movie/:id' render={(props)=> <InfoPage collection={this.props.movieCollection}  pathWay = 'movie' id = {props.match.params.id}/>}/>
                             <Route path='/tvshows/:id' render={(props)=> <InfoPage collection={this.props.showCollection} pathWay = 'tvshows' id = {props.match.params.id}/>}/>
                         </Switch> 

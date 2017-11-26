@@ -26,7 +26,7 @@ export class ItemCollection extends Component {
 
     render() {
         return (
-            <div className = 'ak-moviecollection_movie ak-movie'
+            <div className = {(this.props.isInLibrary)? 'ak-moviecollection_movie ak-movie ak-movie__inlibrary' : 'ak-moviecollection_movie ak-movie'}
                 style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${this.props.item.poster_path})`}}>
                 <div className = 'ak-movie_mask'>
                     <div className = 'ak-movie_button-container'>
@@ -39,12 +39,12 @@ export class ItemCollection extends Component {
                                 {this.props.item.overview}
                             </div>
                         </div>
-                        <div className = 'ak-movie_button ak-movie_button__addToCollection'
+                        <div className = {(this.props.isInLibrary)? 'ak-movie_button ak-movie_button__addToCollection ak-movie_button__inlibrary' : 'ak-movie_button ak-movie_button__addToCollection'}
                             onClick = {() => this.props.addToMyLibrary(this.props.item)}>
                             add
                         </div>
-                        <div className = 'ak-movie_button ak-movie_button__delFromCollection'
-                            onClick = {() => this.props.deleteFromMyLibrary(item)}>
+                        <div className = {(this.props.isInLibrary)? 'ak-movie_button ak-movie_button__delFromCollection' : 'ak-movie_button ak-movie_button__delFromCollection ak-movie_button__inlibrary'}
+                            onClick = {() => this.props.deleteFromMyLibrary(this.props.item)}>
                             del
                         </div>
                     </div>

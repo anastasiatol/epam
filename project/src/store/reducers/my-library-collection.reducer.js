@@ -36,10 +36,16 @@ export function myLibraryCollectionReducer (state = initialState, action) {
             };
 
         case 'DELETE_FROM_MY_LIBRARY':
+            let localStorageMyLibrarySTRR = localStorage.getItem('mylibrary');
+            let localStorageMyLibraryDel = JSON.parse(localStorageMyLibrarySTRR);
+            let newlocalStorageMyLibrary = localStorageMyLibraryDel.filter(v => v.id !== action.payload.id);
+            let newlocalStorageMyLibrarySTR = JSON.stringify(newlocalStorageMyLibrary);
+            localStorage.setItem('mylibrary', newlocalStorageMyLibrarySTR);
+
             let newMyLibraryCollection = state.myLibraryCollection.filter(v => v !== action.payload);
             return {
                 ...state,
-                myLibraryCollection: [...state.newMyLibraryCollection]
+                myLibraryCollection: newMyLibraryCollection
             };
 
         default:
