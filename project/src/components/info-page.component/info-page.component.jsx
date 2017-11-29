@@ -8,6 +8,8 @@ import {
 
 import "./info-page.component.less"; 
 
+import { Progressbar } from './../small-components/progressbar.component/progressbar.component.jsx'
+
 export class InfoPage extends Component {
 
     constructor(props) {  
@@ -67,14 +69,16 @@ export class InfoPage extends Component {
                 <div className = 'ak-info_genre'>
                 </div>
                 <div className = 'ak-info_progess-scale-container'>
-                    <div className = 'ak-info_progess-scale-mini-container'>
-                        Popularity
-                        <progress className = 'ak-info_progress-scale ak-info_progress-scale__yellow' value = {this.state.currentEllement.popularity} max={200}/>
-                    </div>
-                    <div className = 'ak-info_progess-scale-mini-container'>
-                        Vote average
-                        <progress className = 'ak-info_progress-scale ak-info_progress-scale__green' value = {this.state.currentEllement.vote_average} max={10}/>
-                    </div>
+                    <Progressbar 
+                        title = 'Popularity'
+                        value = {this.state.currentEllement.popularity}
+                        max = {200}
+                    />
+                    <Progressbar 
+                        title = 'Vote average'
+                        value = {this.state.currentEllement.vote_average}
+                        max = {10}
+                    />
                 </div>
                 <div className = 'ak-info_recommended ak-recommended'>
                     <div className = 'ak-recommended_text'>

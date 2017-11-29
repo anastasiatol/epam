@@ -15,13 +15,14 @@ export class Searchfield extends Component {
     render(){
         return (
             <div className = 'ak-searchfield ak-mainmenuline_searchfield'>
-                <div className = 'ak-searchfield_searchicon'>
-                </div>
-                    <input className = 'ak-searchfield_text'
+                <input className = 'ak-searchfield_text'
                         onChange = {this.searchMovie}
                         type='text'
                         placeholder = 'Search'
                 />
+                <div className = 'ak-searchfield_searchicon'>
+                    find
+                </div>
             </div>      
         );
     }

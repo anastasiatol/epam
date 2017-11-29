@@ -3,7 +3,13 @@ import "./add-movie-form.component.less";
 
 import { connect } from 'react-redux'; 
 
-import { addMovieFormHide, hideSidebar, getInformationFromServer, addMyMovie } from './../../store/actions/index.js'
+import { addMovieFormHide, 
+    hideSidebar, 
+    getInformationFromServer, 
+    addMyMovie } from './../../store/actions/index.js'
+
+import { CommonInput } from './../small-components/common-input.component/common-input.component.jsx'
+import { CommonTextarea } from '../small-components/common-textarea.component/common-textarea.component.jsx';
 
 class AddMovieForm extends Component {
 
@@ -96,7 +102,7 @@ class AddMovieForm extends Component {
             genre_ids : this.state.genre_ids,
             adult: this.state.adult,
             poster_path: this.state.poster_path,
-            id: Math.random()*(1000-1)            
+            id: Date.now().toString()                            //Math.random()*(1000-1)            
         }
         this.props.addMyMovie (newMovie);
         this.props.addMovieFormHide();
@@ -111,30 +117,20 @@ class AddMovieForm extends Component {
                         Add movie
                     </div>
                     <hr/>
-                    <label className = 'ak-addmovieform_label' 
-                        
-                    >
-                        Title
-                    </label>
-                    <input className = 'ak-addmovieform_input' 
-                        type="text" 
-                        name = 'title'
-                        value = {this.state.title}
-                        onChange = {this.onTitleChange}
+                    <CommonInput 
+                        title = 'Title' 
+                        name = 'title' 
+                        value = {this.state.title} 
+                        onEvent = {this.onTitleChange.bind(this)}
+                        erorrMessage = 'Title is required'
                     />
-                    <div className = 'ak-addmovieform_errormessage'>
-                        Title is required
-                    </div>
-                    <label className = 'ak-addmovieform_label'>
-                        Overview
-                    </label>
-                    <textarea className = 'ak-addmovieform_input' 
-                        rows = '3'
+        
+                    <CommonTextarea
+                        label = 'Overview'
                         name = 'overview'
                         value = {this.state.overview}
-                        onChange = {this.onOverviewChange}
-                    >
-                    </textarea>
+                        onEvent = {this.onOverviewChange.bind(this)}
+                    />
                 </div>
                 <div className = 'ak-addmovieform_innerblock'>
                 {/*<div className = 'ak-addmovieform_label'>
@@ -252,7 +248,7 @@ class AddMovieForm extends Component {
         </div>*/}
                     <input type='checkbox' 
                         className = 'ak-addmovieform_checkboxbtn' 
-                        value='Adult' 
+                        value = {this.state.adult}
                         onClick = {this.isAdult}
                     />
                     <label className='ak-addmovieform_checkbox'>

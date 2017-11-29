@@ -9,3 +9,9 @@ export function hideSidebar () {
         type: 'CHANGE_SIDEBAR_STATE'
     };
 }
+
+export function hideAdvancedSearch() {
+    return {
+        type: 'CHANGE_ADVANCED_SEARCH_STATE'
+    };
+}

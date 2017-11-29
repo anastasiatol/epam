@@ -12,21 +12,25 @@ import { connect } from 'react-redux';
 import { 
     addMovieFormHide, 
     hideSidebar, 
+    hideAdvancedSearch,
     getInformationFromServer, 
     addMovie, 
     getTVshowsFromServer , 
     getGenreFromServer, 
-    getMyLibrary, 
+    getMyLibrary,
+    getSavedSearch, 
     addToMyLibrary,
-    deleteFromMyLibrary
+    deleteFromMyLibrary,
+    cancelSearch
 } from './../../store/actions/index.js'
 import "./app.component.less";
 import { Sidebar } from '../../components/sidebar.component/sidebar.component.jsx';
-import { Searchfield } from '../../components/search-field.component/search-field.component.jsx';
+import { CommonInput } from '../../components/small-components/common-input.component/common-input.component.jsx';
 import { Mainmenu } from '../../components/main-menu.component/main-menu.component.jsx'
 import AddMovieForm from '../../components/add-movie-form.component/add-movie-form.component.jsx';
 import { Collection } from '../../components/collection.component/collection.component.jsx';
 import { InfoPage } from '../../components/info-page.component/info-page.component.jsx';
+import AdvancedSearch from './../advanced-search.component/advanced-search.component.jsx'
 
 
 class App extends Component {
@@ -40,6 +44,8 @@ class App extends Component {
         this.props.getTVshowsFromServer ();
         this.props.getGenreFromServer ();
         this.props.getMyLibrary ();
+        this.props.getSavedSearch();
+        
     }
 
     movieToFind(e) {
@@ -62,16 +68,27 @@ class App extends Component {
             <Router>
                 <div className ='ak-container'>
                     <Sidebar sidebarStateIsOpened = {this.props.sidebarStateIsOpened} hideSidebar = {this.props.hideSidebar.bind(this)}/>
-                    <div className ='ak-maininformation ak-container_maininformation'>
+                    <div className = {this.props.sidebarStateIsOpened? 'ak-maininformation ak-container_maininformation' : 'ak-maininformation ak-container_maininformation ak-container_maininformation__nosidebar'}>
                         <div className ='ak-mainmenuline ak-maininformation_mainmenuline'> 
-                            <Searchfield movieToFind = {this.movieToFind}/>
+                            <div className = 'ak-searchfield ak-mainmenuline_searchfield'>
+                                <CommonInput className = 'ak-searchfield_text'/>
+                                <div className = 'ak-searchfield_icon'
+                                    onClick = {this.props.hideAdvancedSearch}>
+                                    find
+                                </div>
+                                <div className = 'ak-searchfield_icon'
+                                    onClick = {this.props.cancelSearch}>
+                                    cancel
+                                </div>
+                            </div>
                             <Mainmenu addMovieFormHide = {this.props.addMovieFormHide.bind(this)}/>
-                            <AddMovieForm />
-                        </div>    
+                        </div>  
+                        <AdvancedSearch advancedSearchIsOpened = {this.props.advancedSearchIsOpened}/> 
+                        <AddMovieForm /> 
                         <Switch>
                             <Route exact path = '/movies' 
                                 render = {() => (<Collection 
-                                    collection = {this.props.movieCollection} 
+                                    collection = {this.props.filteredMovies} 
                                     addToMyLibrary = {this.props.addToMyLibrary.bind(this)}
                                     deleteFromMyLibrary = {this.props.deleteFromMyLibrary.bind(this)}
                                     itemIsInLibrary = {this.itemIsInLibrary.bind(this)}    
@@ -95,6 +112,7 @@ class App extends Component {
                                     />
                             <Route path='/movie/:id' render={(props)=> <InfoPage collection={this.props.movieCollection}  pathWay = 'movie' id = {props.match.params.id}/>}/>
                             <Route path='/tvshows/:id' render={(props)=> <InfoPage collection={this.props.showCollection} pathWay = 'tvshows' id = {props.match.params.id}/>}/>
+                            <Route path='/mylibrary/:id' render={(props)=> <InfoPage collection={this.props.mylibrary} pathWay = 'mylibrary' id = {props.match.params.id}/>}/>
                         </Switch> 
                     </div>    
                 </div>
@@ -106,24 +124,38 @@ class App extends Component {
 const mapStateToProps = (state) => {
     const addMovieFormIsOpened = state.layoutState.addMovieFormIsOpened;
     const sidebarStateIsOpened = state.layoutState.sidebarStateIsOpened;
+    const advancedSearchIsOpened = state.layoutState.advancedSearchIsOpened;
     var movieCollection = state.movieCollection.movieCollection;
     var showCollection = state.tvShowCollection.showCollection;
     const genre = state.genre.genre;
     var mylibrary = state.myLibraryCollection.myLibraryCollection;
+    var filteredMovies = state.movieCollection.filteredMovies;
+    var advancedSearch = state.advancedSearch.advancedSearch
     
-    return ({ addMovieFormIsOpened , sidebarStateIsOpened, movieCollection, showCollection, genre, mylibrary});
+    return ({ addMovieFormIsOpened , 
+        sidebarStateIsOpened, 
+        advancedSearchIsOpened,
+        movieCollection, 
+        showCollection,
+        genre, 
+        mylibrary,
+        filteredMovies,
+        advancedSearch
+    });
 }
 
 const mapDispatchToProps = (dispatch) => ({
     addMovieFormHide: () => dispatch(addMovieFormHide()),
     hideSidebar: () => dispatch(hideSidebar()),
+    hideAdvancedSearch: ()=> dispatch(hideAdvancedSearch()), 
     getInformationFromServer: () => dispatch(getInformationFromServer()),
     getTVshowsFromServer: () => dispatch(getTVshowsFromServer()),
     getGenreFromServer: () => dispatch(getGenreFromServer()),
     getMyLibrary: () => dispatch(getMyLibrary()),
     addToMyLibrary: (item) => dispatch(addToMyLibrary(item)),
-    deleteFromMyLibrary: (item) => dispatch(deleteFromMyLibrary(item))
-   
+    deleteFromMyLibrary: (item) => dispatch(deleteFromMyLibrary(item)),
+    getSavedSearch: () => dispatch(getSavedSearch()),
+    cancelSearch: () => dispatch(cancelSearch())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
