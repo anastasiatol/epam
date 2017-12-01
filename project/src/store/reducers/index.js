@@ -8,10 +8,11 @@ import { advancedSearchReducer } from './advanced-search.reduser';
 
 
 export const appReducers = combineReducers ({
+    advancedSearch: advancedSearchReducer,
     layoutState: layoutStateReducer,
     movieCollection: movieCollectionReducer,
     tvShowCollection: tvShowCollectionReducer,
     genre: genreReducer,
-    myLibraryCollection: myLibraryCollectionReducer,
-    advancedSearch: advancedSearchReducer
+    myLibraryCollection: myLibraryCollectionReducer
+
 });

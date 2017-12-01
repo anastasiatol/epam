@@ -1,3 +1,5 @@
+import { saveInLocalStorage } from './../../services/saveInLocalStorage.servise';
+import { getFromLocalStorage } from './../../services/getFromLocalStorage.servise';
 
 var initialState = {
     myLibraryCollection: []
@@ -6,30 +8,16 @@ var initialState = {
 export function myLibraryCollectionReducer (state = initialState, action) {
     switch (action.type) {
         case 'GET_MY_LIBRARY':
-            let localStorageMyLibraryS = localStorage.getItem('mylibrary');
-            if (localStorageMyLibraryS) {
-                var localStorageMyLibrary = JSON.parse(localStorageMyLibraryS);
+            if (getFromLocalStorage('mylibrary')) {
                 return {
-                    myLibraryCollection: localStorageMyLibrary
+                    myLibraryCollection: getFromLocalStorage('mylibrary')
                 };
             } else {
                 return state;
             }
 
         case 'ADD_TO_MY_LIBRARY':
-            let localStorageMyLibrarySTR = localStorage.getItem('mylibrary');
-            if (!localStorageMyLibrarySTR) {
-                let arrMyLibrary = [];
-                arrMyLibrary.push(action.payload);
-                let arrMyLibrarySTR = JSON.stringify(arrMyLibrary);
-                localStorage.setItem('mylibrary', arrMyLibrarySTR);
-            } else {
-                let localStorageMyLibrary = JSON.parse(localStorageMyLibrarySTR);
-                localStorageMyLibrary.push(action.payload);
-                let arrMyLibrarySTR = JSON.stringify(localStorageMyLibrary);
-                localStorage.removeItem('mylibrary');
-                localStorage.setItem('mylibrary', arrMyLibrarySTR);
-            }
+            saveInLocalStorage (action.payload, 'mylibrary');
             return {
                 ...state,
                 myLibraryCollection: [...state.myLibraryCollection, action.payload]

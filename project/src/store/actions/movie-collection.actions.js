@@ -17,3 +17,10 @@ export function addMyMovie (payload) {
         payload
     };
 }
+
+export function getSimilarMovieFromServer (payload) {
+    return {
+        type : 'GET_SIMILAR_MOVIES_FROM_SERVER',
+        payload
+    };
+}

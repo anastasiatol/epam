@@ -10,3 +10,10 @@ export function addTVShow (payload) {
         payload
     };
 }
+
+export function getSimilarTVFromServer (payload) {
+    return {
+        type : 'GET_SIMILAR_TV_FROM_SERVER',
+        payload
+    };
+}

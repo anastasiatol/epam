@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import axios from 'axios';
 import {
     HashRouter as Router,
     Route,
@@ -21,7 +20,8 @@ import {
     getSavedSearch, 
     addToMyLibrary,
     deleteFromMyLibrary,
-    cancelSearch
+    cancelSearch,
+    doAdvancedSearch
 } from './../../store/actions/index.js'
 import "./app.component.less";
 import { Sidebar } from '../../components/sidebar.component/sidebar.component.jsx';
@@ -29,9 +29,10 @@ import { CommonInput } from '../../components/small-components/common-input.comp
 import { Mainmenu } from '../../components/main-menu.component/main-menu.component.jsx'
 import AddMovieForm from '../../components/add-movie-form.component/add-movie-form.component.jsx';
 import { Collection } from '../../components/collection.component/collection.component.jsx';
-import { InfoPage } from '../../components/info-page.component/info-page.component.jsx';
+import InfoPage from '../../components/info-page.component/info-page.component.jsx';
 import AdvancedSearch from './../advanced-search.component/advanced-search.component.jsx'
-
+import { AboutMeInfoPage } from './../about-me-info-page.component/about-me-info-page.component.jsx'
+import { Support } from './../support.component/support.component.jsx'
 
 class App extends Component {
     constructor (props) {
@@ -45,7 +46,6 @@ class App extends Component {
         this.props.getGenreFromServer ();
         this.props.getMyLibrary ();
         this.props.getSavedSearch();
-        
     }
 
     movieToFind(e) {
@@ -61,7 +61,6 @@ class App extends Component {
         }
         return false; 
     }
-
 
     render() {
         return (
@@ -110,9 +109,11 @@ class App extends Component {
                                     itemIsInLibrary = {this.itemIsInLibrary.bind(this)} 
                                     pathWay = 'mylibrary'/>)}
                                     />
-                            <Route path='/movie/:id' render={(props)=> <InfoPage collection={this.props.movieCollection}  pathWay = 'movie' id = {props.match.params.id}/>}/>
-                            <Route path='/tvshows/:id' render={(props)=> <InfoPage collection={this.props.showCollection} pathWay = 'tvshows' id = {props.match.params.id}/>}/>
-                            <Route path='/mylibrary/:id' render={(props)=> <InfoPage collection={this.props.mylibrary} pathWay = 'mylibrary' id = {props.match.params.id}/>}/>
+                            <Route path='/movie/:id' render={(props)=> <InfoPage pathWay = 'movie' params = {props.match.params} id = {props.match.params.id}/>}/>
+                            <Route path='/tvshows/:id' render={(props)=> <InfoPage pathWay = 'tvshows' id = {props.match.params.id}/>}/>
+                            <Route path='/mylibrary/:id' render={(props)=> <InfoPage pathWay = 'mylibrary' id = {props.match.params.id}/>}/>
+                            <Route path='/about' render={()=> <AboutMeInfoPage/>}/>
+                            <Route path='/support' render={() => <Support/>}/>
                         </Switch> 
                     </div>    
                 </div>
@@ -155,7 +156,8 @@ const mapDispatchToProps = (dispatch) => ({
     addToMyLibrary: (item) => dispatch(addToMyLibrary(item)),
     deleteFromMyLibrary: (item) => dispatch(deleteFromMyLibrary(item)),
     getSavedSearch: () => dispatch(getSavedSearch()),
-    cancelSearch: () => dispatch(cancelSearch())
+    cancelSearch: () => dispatch(cancelSearch()),
+    doAdvancedSearch: (dataSearch) => dispatch(doAdvancedSearch(dataSearch))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

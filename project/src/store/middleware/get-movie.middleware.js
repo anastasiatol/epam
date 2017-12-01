@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { IdentityMovie } from './../../services/getToIdentityMovies.servise';
+import { getFromLocalStorage } from './../../services/getFromLocalStorage.servise';
 
 const getMovie = store => next => action => {
 
@@ -11,12 +12,9 @@ const getMovie = store => next => action => {
             movieCollection = movieCollection.map((item) => {
                 return new IdentityMovie(item);
             });
-            let localStorageMyMoviesSTR = localStorage.getItem('movies');
-            if (localStorageMyMoviesSTR) {
-                var localStorageMyMovies = JSON.parse(localStorageMyMoviesSTR);
-                movieCollection = movieCollection.concat(localStorageMyMovies);
+            if (getFromLocalStorage('movies')){
+                movieCollection = movieCollection.concat(getFromLocalStorage('movies'));
             }
-            console.log(movieCollection);
             store.dispatch({
                 type: 'MOVIES_FROM_SERVER',
                 payload: movieCollection

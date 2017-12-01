@@ -50,6 +50,7 @@ export class ItemCollection extends Component {
                     </div>
                     <NavLink to = {`/${this.props.pathWay}/${this.props.item.id}`}
                         className = 'ak-movie_link'>
+                        
                         <div className = 'ak-movie_title'>
                             {this.props.item.title}
                         </div>

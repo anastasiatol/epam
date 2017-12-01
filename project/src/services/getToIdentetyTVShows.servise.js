@@ -8,5 +8,6 @@ export class IdentityTVShow {
         this.adult = identity.adult || false;
         this.vote_average = identity.vote_average || '';
         this.popularity = identity.popularity || '';
+        this.type = 'tv';
     }
 }

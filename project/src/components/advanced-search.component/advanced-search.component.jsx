@@ -53,7 +53,7 @@ class AdvancedSearch extends Component {
     }
 
     rememberInputs(e) {
-        this.setState ({rememberInputs : !this.dataSearch.rememberInputs})
+        this.setState ({rememberInputs : !this.state.rememberInputs})
     }
     
     render () {
@@ -98,7 +98,7 @@ class AdvancedSearch extends Component {
                     Remember inputs
                 </label>
                 <button className = 'ak-addmovieform_button ak-addmovieform_button__cancel'
-                    onClick = {() => this.props.doAdvancedSearch(this.state)}       //add data
+                    onClick = {() => this.props.doAdvancedSearch(this.state)}
                 >
                     Search
                 </button>
@@ -118,8 +118,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    doAdvancedSearch: (dataSearch) => dispatch(doAdvancedSearch(dataSearch))    //add data 
-
+    doAdvancedSearch: (dataSearch) => dispatch(doAdvancedSearch(dataSearch))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdvancedSearch)

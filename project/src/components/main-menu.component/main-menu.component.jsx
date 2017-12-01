@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import "./main-menu.component.less";
+import { NavLink } from 'react-router-dom';
 
 export const Mainmenu = (props) => {
         return (
@@ -10,9 +10,10 @@ export const Mainmenu = (props) => {
                 >
                     Add movie                
                 </div>
-                <div className = 'ak-mainmenu_item'>
+                <NavLink to = '/about'  className = 'ak-mainmenu_item'>
+                    
                     About           
-                </div>
+                </NavLink>
             </div> 
         );
     }

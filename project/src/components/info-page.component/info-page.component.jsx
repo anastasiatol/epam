@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ReactDOM from "react-dom";
+import { connect } from 'react-redux'; 
 import {
     HashRouter as Router,
     Route,
@@ -6,40 +8,55 @@ import {
     Switch
     } from 'react-router-dom'
 
+import { 
+    getSimilarMovieFromServer,
+    getSimilarTVFromServer   
+} from './../../store/actions/index.js'
+
 import "./info-page.component.less"; 
 
 import { Progressbar } from './../small-components/progressbar.component/progressbar.component.jsx'
 
-export class InfoPage extends Component {
+class InfoPage extends Component {
 
     constructor(props) {  
         super(props);
-        this.state ={
-            currentEllement : {}
-        }
-    }
-    
-  /*  changeInfoPage (id) {
-        console.log(props);
-            this.props.collection.forEach(function(item) {
-                if (item.id === id) {
-                    this.setState({currentEllement : item})
-                }
-            }, this);
-        }*/
-
-    componentWillMount() {
-        this.props.collection.forEach(function(item) {
+        
+        
+        this.props.movieCollection.forEach(function(item) {
             if (item.id === +this.props.id) {
-                this.setState({currentEllement : item})
+                this.state= {currentEllement : item}
+            }
+        }, this);
+        this.props.showCollection.forEach(function(item) {
+            if (item.id === +this.props.id) {
+                this.state= {currentEllement : item}
             }
         }, this);
 
-        
+        if (this.state.currentEllement.type === 'movie'){
+            this.props.getSimilarMovieFromServer(`https://api.themoviedb.org/3/movie/${this.state.currentEllement.id}/similar?api_key=ed17cc3db4b89c8d4e968b98ff4f8266&language=en-US&page=1`)
+        }
+
+        if (this.state.currentEllement.type === 'tv'){
+            this.props.getSimilarTVFromServer(`https://api.themoviedb.org/3/tv/${this.state.currentEllement.id}/similar?api_key=ed17cc3db4b89c8d4e968b98ff4f8266&language=en-US&page=1`)
+        }
+
+    }
+
+    changeCurrentElement(item){
+        this.setState({currentEllement : item})
+        if (item.type === 'movie'){
+            this.props.getSimilarMovieFromServer(`https://api.themoviedb.org/3/movie/${item.id}/similar?api_key=ed17cc3db4b89c8d4e968b98ff4f8266&language=en-US&page=1`)
+        }
+
+        if (item.type === 'tv'){
+            this.props.getSimilarTVFromServer(`https://api.themoviedb.org/3/tv/${item.id}/similar?api_key=ed17cc3db4b89c8d4e968b98ff4f8266&language=en-US&page=1`)
+
+        }
     }
 
     render() {
-        console.log('props', this.props)
         return (
             <div className = 'ak-maininformation_info ak-info'>
                 <div className = 'ak-info_poster-overview' >   
@@ -85,22 +102,62 @@ export class InfoPage extends Component {
                         We also recommended
                     </div>
                     <div className = 'ak-recommended_movies'>
-                        {this.props.collection
-                            .map((item, index) => {
-                                return (
-                                    <NavLink to = {`/${this.props.pathWay}/${item.id}`}
-                                    key = {index} id = {item.id}>
-                                        <div className = 'ak-recommended_movie'
-                                            key= {index}
-                                            style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${item.poster_path})`}}
-                                            //onClick = {this.changeInfoPage}
-                                        />
-                                    </NavLink>
-                                )}
-                            )}
-                    </div>
+                        {(this.props.pathWay === 'movie')? 
+                            this.props.similarMovies
+                                .map((item, index) => {
+                                    return (
+                                        <NavLink to = {`/${this.props.pathWay}/${item.id}`}
+                                        key = {index} 
+                                        id = {item.id}
+                                        onClick = {()=>this.changeCurrentElement(item)}>
+                                            <div className = 'ak-recommended_movie'
+                                                key= {index}
+                                                style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${item.poster_path})`}}
+                                            />
+                                        </NavLink>
+                                    )}
+                                ):
+                                this.props.similarShows
+                                .map((item, index) => {
+                                    return (
+                                        <NavLink to = {`/${this.props.pathWay}/${item.id}`}
+                                        key = {index} 
+                                        id = {item.id}
+                                        onClick = {()=>this.changeCurrentElement(item)}>
+                                            <div className = 'ak-recommended_movie'
+                                                key= {index}
+                                                style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${item.poster_path})`}}
+                                            />
+                                        </NavLink>
+                                    )}
+                                )
+                            }
+                        </div>
                 </div>  
             </div>
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    var movieCollection = state.movieCollection.movieCollection;
+    var showCollection = state.tvShowCollection.showCollection;
+    var mylibrary = state.myLibraryCollection.myLibraryCollection;
+    var similarMovies = state.movieCollection.similarMovies;
+    var similarShows = state.tvShowCollection.similarShows
+
+    return ({ 
+        movieCollection, 
+        showCollection,
+        mylibrary,
+        similarMovies,
+        similarShows
+    });
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    getSimilarMovieFromServer: (url) => dispatch(getSimilarMovieFromServer(url)),
+    getSimilarTVFromServer: (url) => dispatch(getSimilarTVFromServer(url))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(InfoPage)
