@@ -16,3 +16,9 @@ export function cancelSearch () {
         type: 'CANCEL_SEARCH'
     };
 }
+
+export function closeAdvancedSearch() {
+    return {
+        type: 'CLOSE_ADVANCED_SEARCH'
+    };
+}

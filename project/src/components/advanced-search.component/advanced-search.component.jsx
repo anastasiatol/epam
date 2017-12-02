@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import { 
     addMovieFormHide,
-    doAdvancedSearch 
+    doAdvancedSearch,
+    cancelSearch 
 } from './../../store/actions/index.js'
 
 import './advanced-search.component.less'
@@ -19,9 +20,10 @@ class AdvancedSearch extends Component {
         this.state ={
             title : this.props.advancedSearch.title,
             overview : this.props.advancedSearch.overview,
-            genre_ids : this.props.advancedSearch.genre_ids,
+            genre : this.props.advancedSearch.genre,
             adult : this.props.advancedSearch.adult,
-            rememberInputs : this.props.advancedSearch.rememberInputs
+            rememberInputs : this.props.advancedSearch.rememberInputs,
+            genre_ids: this.props.advancedSearch.genre_ids
         }
     }
 
@@ -35,6 +37,9 @@ class AdvancedSearch extends Component {
 
     genreChange(e) {
         if (e.target.type === 'checkbox') {
+            let genreArr = this.state.genre;
+            genreArr[e.target.value] = !genreArr[e.target.value]
+            this.setState({genre : genreArr});
             for (let i = 0; i<this.props.genre.length; i++) {
                 if ( e.target.value === this.props.genre[i].name) {
                     if (e.target.checked) {
@@ -45,7 +50,6 @@ class AdvancedSearch extends Component {
                 }
             }
         }
-        console.log('this.state.genre_id', this.state.genre_ids)
     }
     
     adultChange(e) {
@@ -56,6 +60,30 @@ class AdvancedSearch extends Component {
         this.setState ({rememberInputs : !this.state.rememberInputs})
     }
     
+    closeAdvancedSearch () {
+        this.props.cancelSearch();
+        let genreArr = this.props.advancedSearch.genre
+        this.setState ({
+            title: '',
+            overview: '',
+            genre: {
+                'Action': false,
+                'Adventure': false,
+                'Thriller': false,
+                'Comedy': false,
+                'Fantasy': false,
+                'Drama': false,
+                'Horror': false,
+                'Crime': false,
+                'War': false,
+                'Documentary': false
+            },
+            adult: false,
+            rememberInputs: false,
+            genre_ids: []
+        })
+    }
+
     render () {
         return ( 
             <div className = {this.props.advancedSearchIsOpened ? 'ak-advanced-search' : 'ak-advanced-search ak-advanced-search__hide'}>
@@ -79,12 +107,13 @@ class AdvancedSearch extends Component {
                 </div>
                 <GenreList
                     onEvent = {this.genreChange.bind(this)}
-                
+                    value = {this.state.genre}
                 />
                 <input type='checkbox' 
                     className = 'ak-advanced-search_checkboxbtn' 
                     value= {this.state.adult} 
                     onClick = {this.adultChange.bind(this)}
+                    checked = {this.state.adult}
                 />
                 <label className='ak-addmovieform_checkbox'>
                     Adult
@@ -93,14 +122,20 @@ class AdvancedSearch extends Component {
                     className = 'ak-advanced-search_checkboxbtn' 
                     value = {this.state.rememberInputs} 
                     onClick = {this.rememberInputs.bind(this)}
+                    checked = {this.state.rememberInputs}
                 />
                 <label className='ak-advanced-search_checkbox'>
                     Remember inputs
                 </label>
-                <button className = 'ak-addmovieform_button ak-addmovieform_button__cancel'
+                <button className = 'ak-addmovieform_button'
                     onClick = {() => this.props.doAdvancedSearch(this.state)}
                 >
                     Search
+                </button>
+                <button className = 'ak-addmovieform_button'
+                    onClick = {() => this.closeAdvancedSearch()}
+                >
+                    Cancel
                 </button>
             </div>
         )
@@ -118,7 +153,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    doAdvancedSearch: (dataSearch) => dispatch(doAdvancedSearch(dataSearch))
+    doAdvancedSearch: (dataSearch) => dispatch(doAdvancedSearch(dataSearch)),
+    cancelSearch: () => dispatch(cancelSearch())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdvancedSearch)

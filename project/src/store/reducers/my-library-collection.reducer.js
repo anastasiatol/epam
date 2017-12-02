@@ -1,8 +1,10 @@
 import { saveInLocalStorage } from './../../services/saveInLocalStorage.servise';
 import { getFromLocalStorage } from './../../services/getFromLocalStorage.servise';
+import { advancedSearchServise } from './../../services/advanced-search.servise';
 
 var initialState = {
-    myLibraryCollection: []
+    myLibraryCollection: [],
+    filteredMylibrary: []
 };
 
 export function myLibraryCollectionReducer (state = initialState, action) {
@@ -10,6 +12,7 @@ export function myLibraryCollectionReducer (state = initialState, action) {
         case 'GET_MY_LIBRARY':
             if (getFromLocalStorage('mylibrary')) {
                 return {
+                    ...state,
                     myLibraryCollection: getFromLocalStorage('mylibrary')
                 };
             } else {
@@ -34,6 +37,19 @@ export function myLibraryCollectionReducer (state = initialState, action) {
             return {
                 ...state,
                 myLibraryCollection: newMyLibraryCollection
+            };
+
+        case 'DO_ADVANCED_SEARCH':
+            let filteredMylibrary = advancedSearchServise (state.filteredMylibrary, action.payload);
+            return {
+                ...state,
+                filteredMylibrary: filteredMylibrary
+            };
+
+        case 'CANCEL_SEARCH':
+            return {
+                ...state,
+                filteredMylibrary: state.myLibraryCollection
             };
 
         default:

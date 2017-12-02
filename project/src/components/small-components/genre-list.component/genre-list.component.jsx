@@ -18,6 +18,7 @@ export class GenreList extends Component {
                                 className = 'ak-addmovieform_checkboxbtn' 
                                 name = 'Genre' 
                                 value='Action' 
+                                checked = {this.props.value.Action}
                             />
                             <label className='ak-addmovieform_checkbox'>
                                 Action
@@ -28,6 +29,7 @@ export class GenreList extends Component {
                                 className = 'ak-addmovieform_checkboxbtn' 
                                 name = 'Genre' 
                                 value='Adventure' 
+                                checked = {this.props.value.Adventure}
                             />
                             <label className='ak-addmovieform_checkbox'>
                                 Adventure
@@ -38,6 +40,7 @@ export class GenreList extends Component {
                                 className = 'ak-addmovieform_checkboxbtn' 
                                 name = 'Genre' 
                                 value='Thriller' 
+                                checked = {this.props.value.Thriller}
                             />
                             <label className='ak-addmovieform_checkbox'>
                                 Thriller
@@ -48,6 +51,7 @@ export class GenreList extends Component {
                                 className = 'ak-addmovieform_checkboxbtn' 
                                 name = 'Genre' 
                                 value='Comedy' 
+                                checked = {this.props.value.Comedy}
                             />
                             <label className='ak-addmovieform_checkbox'>
                                 Comedy
@@ -57,7 +61,8 @@ export class GenreList extends Component {
                             <input type='checkbox' 
                                 className = 'ak-addmovieform_checkboxbtn' 
                                 name = 'Genre' 
-                                value='Fantasy' 
+                                value='Fantasy'
+                                checked = {this.props.value.Fantasy} 
                             />
                             <label className='ak-addmovieform_checkbox'>
                                 Fantasy
@@ -70,6 +75,7 @@ export class GenreList extends Component {
                                 className = 'ak-addmovieform_checkboxbtn' 
                                 name = 'Genre' 
                                 value='Drama' 
+                                checked = {this.props.value.Drama}
                             />
                             <label className='ak-addmovieform_checkbox'>
                                 Drama
@@ -79,7 +85,8 @@ export class GenreList extends Component {
                             <input type='checkbox' 
                                 className = 'ak-addmovieform_checkboxbtn' 
                                 name = 'Genre' 
-                                value='Horror' 
+                                value='Horror'
+                                checked = {this.props.value.Horror}
                             />
                             <label className='ak-addmovieform_checkbox'>
                                 Horror
@@ -90,6 +97,7 @@ export class GenreList extends Component {
                                 className = 'ak-addmovieform_checkboxbtn' 
                                 name = 'Genre' 
                                 value='Crime' 
+                                checked = {this.props.value.Crime}
                             />
                             <label className='ak-addmovieform_checkbox'>
                                 Crime
@@ -100,6 +108,7 @@ export class GenreList extends Component {
                                 className = 'ak-addmovieform_checkboxbtn' 
                                 name = 'Genre' 
                                 value='War' 
+                                checked = {this.props.value.War}
                             />
                             <label className='ak-addmovieform_checkbox'>
                                 War
@@ -109,7 +118,8 @@ export class GenreList extends Component {
                             <input type='checkbox' 
                                 className = 'ak-addmovieform_checkboxbtn' 
                                 name = 'Genre' 
-                                value='Documentary' 
+                                value='Documentary'
+                                checked = {this.props.value.Documentary} 
                             />
                             <label className='ak-addmovieform_checkbox'>
                                 Documentary

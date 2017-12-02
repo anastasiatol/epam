@@ -5,9 +5,21 @@ var initialState = {
     advancedSearch : {
         title: '',
         overview: '',
-        genre_ids: [],
+        genre: {
+            'Action': false,
+            'Adventure': false,
+            'Thriller': false,
+            'Comedy': false,
+            'Fantasy': false,
+            'Drama': false,
+            'Horror': false,
+            'Crime': false,
+            'War': false,
+            'Documentary': false
+        },
         adult: false,
-        rememberInputs: false
+        rememberInputs: false,
+        genre_ids: []
     }
 };
 
@@ -27,12 +39,32 @@ export function advancedSearchReducer (state = initialState, action) {
             if (action.payload.rememberInputs) {
                 saveInLocalStorage (action.payload, 'advancedsearch');
             }
-            return {
-                advancedSearch: action.payload[0]
-            };
+            return state;
 
         case 'CANCEL_SEARCH':
-            return state = initialState;
+            localStorage.removeItem('advancedsearch');
+            return {
+                advancedSearch : {
+                    title: '',
+                    overview: '',
+                    genre: {
+                        'Action': false,
+                        'Adventure': false,
+                        'Thriller': false,
+                        'Comedy': false,
+                        'Fantasy': false,
+                        'Drama': false,
+                        'Horror': false,
+                        'Crime': false,
+                        'War': false,
+                        'Documentary': false
+                    },
+                    adult: false,
+                    rememberInputs: false,
+                    genre_ids: []
+                }
+            };
+
         default:
             return state;
     }

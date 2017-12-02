@@ -41,11 +41,12 @@ class App extends Component {
         this.movieToFind = this.movieToFind.bind(this);
         this.itemIsInLibrary = this.itemIsInLibrary.bind(this);
 
-        this.props.getInformationFromServer ();
-        this.props.getTVshowsFromServer ();
         this.props.getGenreFromServer ();
-        this.props.getMyLibrary ();
         this.props.getSavedSearch();
+        this.props.getInformationFromServer();
+        this.props.getTVshowsFromServer();
+        this.props.getMyLibrary ();
+        
     }
 
     movieToFind(e) {
@@ -75,10 +76,6 @@ class App extends Component {
                                     onClick = {this.props.hideAdvancedSearch}>
                                     find
                                 </div>
-                                <div className = 'ak-searchfield_icon'
-                                    onClick = {this.props.cancelSearch}>
-                                    cancel
-                                </div>
                             </div>
                             <Mainmenu addMovieFormHide = {this.props.addMovieFormHide.bind(this)}/>
                         </div>  
@@ -95,7 +92,7 @@ class App extends Component {
                             />
                             <Route exact path = '/tvshows' 
                                 render = {() => (<Collection 
-                                    collection = {this.props.showCollection} 
+                                    collection = {this.props.filteredShows} 
                                     addToMyLibrary = {this.props.addToMyLibrary.bind(this)}
                                     deleteFromMyLibrary = {this.props.deleteFromMyLibrary.bind(this)}
                                     itemIsInLibrary = {this.itemIsInLibrary.bind(this)} 
@@ -109,7 +106,7 @@ class App extends Component {
                                     itemIsInLibrary = {this.itemIsInLibrary.bind(this)} 
                                     pathWay = 'mylibrary'/>)}
                                     />
-                            <Route path='/movie/:id' render={(props)=> <InfoPage pathWay = 'movie' params = {props.match.params} id = {props.match.params.id}/>}/>
+                            <Route path='/movie/:id' render={(props)=> <InfoPage pathWay = 'movie' id = {props.match.params.id}/>}/>
                             <Route path='/tvshows/:id' render={(props)=> <InfoPage pathWay = 'tvshows' id = {props.match.params.id}/>}/>
                             <Route path='/mylibrary/:id' render={(props)=> <InfoPage pathWay = 'mylibrary' id = {props.match.params.id}/>}/>
                             <Route path='/about' render={()=> <AboutMeInfoPage/>}/>
@@ -131,6 +128,8 @@ const mapStateToProps = (state) => {
     const genre = state.genre.genre;
     var mylibrary = state.myLibraryCollection.myLibraryCollection;
     var filteredMovies = state.movieCollection.filteredMovies;
+    var filteredShows = state.tvShowCollection.filteredShows;
+    var filteredMylibrary = state.myLibraryCollection.filteredMylibrary;
     var advancedSearch = state.advancedSearch.advancedSearch
     
     return ({ addMovieFormIsOpened , 
@@ -141,6 +140,8 @@ const mapStateToProps = (state) => {
         genre, 
         mylibrary,
         filteredMovies,
+        filteredShows,
+        filteredMylibrary,
         advancedSearch
     });
 }

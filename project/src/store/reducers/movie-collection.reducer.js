@@ -30,10 +30,10 @@ export function movieCollectionReducer (state = initialState, action) {
             }; //filtered movies ????
 
         case 'DO_ADVANCED_SEARCH':
-            let filteredMovies = advancedSearchServise (state.movieCollection, action.payload);
+            let filteredMoviesArr = advancedSearchServise (state.movieCollection, action.payload);
             return {
                 ...state,
-                filteredMovies: filteredMovies
+                filteredMovies: filteredMoviesArr
             };
 
         case 'CANCEL_SEARCH':

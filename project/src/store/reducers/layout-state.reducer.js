@@ -24,7 +24,17 @@ export function layoutStateReducer (state = initialState, action) {
             case 'DO_ADVANCED_SEARCH':
             return{
                 ...state,
-                advancedSearchIsOpened: !state.advancedSearchIsOpened
+                advancedSearchIsOpened: false
+            };
+            case 'CLOSE_ADVANCED_SEARCH':
+            return{
+                ...state,
+                advancedSearchIsOpened: false
+            };
+            case 'CANCEL_SEARCH':
+            return{
+                ...state,
+                advancedSearchIsOpened: false
             };
 
         default:
