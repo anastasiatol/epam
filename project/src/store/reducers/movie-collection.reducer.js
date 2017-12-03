@@ -26,9 +26,13 @@ export function movieCollectionReducer (state = initialState, action) {
 
         case 'ADD_MY_MOVIE':
             saveInLocalStorage (action.payload, 'movies');
+            var filteredItem = [];
+            filteredItem.push(action.payload);
+            filteredItem = advancedSearchServise (filteredItem, advancedSearchInitialServise());
             return {
                 ...state,
-                movieCollection: [...state.movieCollection, action.payload]
+                movieCollection: [...state.movieCollection, action.payload],
+                filteredMylibrary: [...state.filteredMylibrary, filteredItem[0]]
             };
 
         case 'DO_ADVANCED_SEARCH':

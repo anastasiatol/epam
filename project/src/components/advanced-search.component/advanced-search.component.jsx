@@ -86,7 +86,7 @@ class AdvancedSearch extends Component {
 
     render () {
         return ( 
-            <div className = {this.props.advancedSearchIsOpened ? 'ak-advanced-search' : 'ak-advanced-search ak-advanced-search__hide'}>
+            <div className = {this.props.advancedSearchIsOpened ? 'ak-container_advanced-search ak-advanced-search' : 'ak-container_advanced-search ak-advanced-search ak-advanced-search__hide'}>
                 <div className = 'ak-advanced-search_title'>
                     Advanced search
                 </div>

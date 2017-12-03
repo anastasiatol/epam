@@ -10,6 +10,7 @@ import { addMovieFormHide,
 
 import { CommonInput } from './../small-components/common-input.component/common-input.component.jsx'
 import { CommonTextarea } from '../small-components/common-textarea.component/common-textarea.component.jsx';
+import { GenreList} from './../small-components/genre-list.component/genre-list.component.jsx'
 
 class AddMovieForm extends Component {
 
@@ -19,6 +20,18 @@ class AddMovieForm extends Component {
             title: '',
             overview: '',
             genre_ids: [],
+            genre: {
+                'Action': false,
+                'Adventure': false,
+                'Thriller': false,
+                'Comedy': false,
+                'Fantasy': false,
+                'Drama': false,
+                'Horror': false,
+                'Crime': false,
+                'War': false,
+                'Documentary': false
+            },
             adult: false,
             isDisable: true,
             poster_path: ''
@@ -27,15 +40,15 @@ class AddMovieForm extends Component {
         this.checkValid = this.checkValid.bind(this);
         this.onTitleChange = this.onTitleChange.bind(this);
         this.onOverviewChange = this.onOverviewChange.bind(this);
-        this.addGenre = this.addGenre.bind(this);
         this.isAdult = this.isAdult.bind(this);
         this.cancel = this.cancel.bind(this);
+        this.genreChange = this.genreChange.bind(this)
 
     }
  
     checkValid() {
         this.setState( function (prevState) {
-            if ((prevState.title) /*&& (prevState.poster_path)*/) {
+            if ((prevState.title) && (prevState.genre_ids.length)) {
                 return {isDisable : false}
             } else {
                 return {isDisable : true}
@@ -52,27 +65,21 @@ class AddMovieForm extends Component {
         this.setState({overview: e.target.value})
     }
     
-    addGenre(e) {
-        let genreID = 0;        
+    genreChange(e) {
         if (e.target.type === 'checkbox') {
-            this.props.genre.forEach(function(element) {
-                if (element.name === e.target.value) {
-                    genreID = element.id;
-                }
-            }, this);
-            console.log (`${e.target.value}`);
-
-            if (this.state.genre_ids.indexOf(genreID) === -1) {
-                this.setState({genre_ids: this.state.genre_ids.push(genreID)})
-            } else {
-                for (let i =0; i<this.state.genre_ids.length; i++) {
-                    if (e.target.value === this.state.genre_ids[i]) {
-                        this.state.genre_ids.splice(i,i);
+            let genreArr = this.state.genre;
+            genreArr[e.target.value] = !genreArr[e.target.value]
+            this.setState({genre : genreArr});
+            for (let i = 0; i<this.props.genre.length; i++) {
+                if ( e.target.value === this.props.genre[i].name) {
+                    if (e.target.checked) {
+                        this.setState({genre_ids: this.state.genre_ids.concat(this.props.genre[i].id)})
+                    } else {
+                        this.setState({genre_ids: this.state.genre_ids.filter(v => v !== this.props.genre[i].id)})
                     }
-                }  
-            } 
+                }
+            }
         }
-        console.log(this.state.genre_ids)
     }
 
     isAdult(e) {
@@ -102,7 +109,8 @@ class AddMovieForm extends Component {
             genre_ids : this.state.genre_ids,
             adult: this.state.adult,
             poster_path: this.state.poster_path,
-            id: Date.now().toString()                            //Math.random()*(1000-1)            
+            type: 'movie',
+            id: (Date.now().toString())           
         }
         this.props.addMyMovie (newMovie);
         this.props.addMovieFormHide();
@@ -133,119 +141,10 @@ class AddMovieForm extends Component {
                     />
                 </div>
                 <div className = 'ak-addmovieform_innerblock'>
-                {/*<div className = 'ak-addmovieform_label'>
-                    Genre
-                </div>
-                    <div className = 'ak-addmovieform_checkboxbtncontainer'
-                        onClick = {this.addGenre}>
-                        <div className = 'ak-addmovieform_halfcheckboxbtncontainer'>
-                            <p>
-                                <input type='checkbox' 
-                                    className = 'ak-addmovieform_checkboxbtn' 
-                                    name = 'Genre' 
-                                    value='Action' 
-                                />
-                                <label className='ak-addmovieform_checkbox'>
-                                    Action
-                                </label>
-                            </p>
-                            <p>
-                                <input type='checkbox' 
-                                    className = 'ak-addmovieform_checkboxbtn' 
-                                    name = 'Genre' 
-                                    value='Adventure' 
-                                />
-                                <label className='ak-addmovieform_checkbox'>
-                                    Adventure
-                                </label>
-                            </p>
-                            <p>
-                                <input type='checkbox' 
-                                    className = 'ak-addmovieform_checkboxbtn' 
-                                    name = 'Genre' 
-                                    value='Thriller' 
-                                />
-                                <label className='ak-addmovieform_checkbox'>
-                                    Thriller
-                                </label>
-                            </p>
-                            <p>
-                                <input type='checkbox' 
-                                    className = 'ak-addmovieform_checkboxbtn' 
-                                    name = 'Genre' 
-                                    value='Comedy' 
-                                />
-                                <label className='ak-addmovieform_checkbox'>
-                                    Comedy
-                                </label>
-                            </p>
-                            <p>
-                                <input type='checkbox' 
-                                    className = 'ak-addmovieform_checkboxbtn' 
-                                    name = 'Genre' 
-                                    value='Fantasy' 
-                                />
-                                <label className='ak-addmovieform_checkbox'>
-                                    Fantasy
-                                </label>
-                            </p>
-                        </div>
-                        <div className = 'ak-addmovieform_halfcheckboxbtncontainer'>
-                            <p>
-                                <input type='checkbox' 
-                                    className = 'ak-addmovieform_checkboxbtn' 
-                                    name = 'Genre' 
-                                    value='Drama' 
-                                />
-                                <label className='ak-addmovieform_checkbox'>
-                                    Drama
-                                </label>
-                            </p>
-                            <p>
-                                <input type='checkbox' 
-                                    className = 'ak-addmovieform_checkboxbtn' 
-                                    name = 'Genre' 
-                                    value='Horror' 
-                                />
-                                <label className='ak-addmovieform_checkbox'>
-                                    Horror
-                                </label>
-                            </p>
-                            <p>
-                                <input type='checkbox' 
-                                    className = 'ak-addmovieform_checkboxbtn' 
-                                    name = 'Genre' 
-                                    value='Crime' 
-                                />
-                                <label className='ak-addmovieform_checkbox'>
-                                    Crime
-                                </label>
-                            </p>
-                            <p>
-                                <input type='checkbox' 
-                                    className = 'ak-addmovieform_checkboxbtn' 
-                                    name = 'Genre' 
-                                    value='War' 
-                                />
-                                <label className='ak-addmovieform_checkbox'>
-                                    War
-                                </label>
-                            </p>
-                            <p>
-                                <input type='checkbox' 
-                                    className = 'ak-addmovieform_checkboxbtn' 
-                                    name = 'Genre' 
-                                    value='Documentary' 
-                                />
-                                <label className='ak-addmovieform_checkbox'>
-                                    Documentary
-                                </label>
-                            </p>
-                        </div>
-                    </div>
-                    <div className = 'ak-addmovieform_errormessage'>
-                        Genre is required
-        </div>*/}
+                <GenreList
+                    onEvent = {this.genreChange.bind(this)}
+                    value = {this.state.genre}
+                    />
                     <input type='checkbox' 
                         className = 'ak-addmovieform_checkboxbtn' 
                         value = {this.state.adult}
@@ -263,17 +162,19 @@ class AddMovieForm extends Component {
                     <div className = 'ak-addmovieform_errormessage'>
                         Upload one poster as minimum
                     </div>*/}
-                    <button className = 'ak-addmovieform_button ak-addmovieform_button__add'
-                        disabled = {this.state.isDisable}
-                        type = 'submit'
-                        >
-                        Add
-                    </button>
-                    <button className = 'ak-addmovieform_button ak-addmovieform_button__cancel'
-                        onClick = {this.cancel}
-                        type = 'reset'>
-                        Cancel
-                    </button>
+                    <div className = 'ak-addmovieform_button-container'>
+                        <button className = 'ak-addmovieform_button ak-addmovieform_button__add'
+                            disabled = {this.state.isDisable}
+                            type = 'submit'
+                            >
+                            Add
+                        </button>
+                        <button className = 'ak-addmovieform_button ak-addmovieform_button__cancel'
+                            onClick = {this.cancel}
+                            type = 'reset'>
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             </form>
         );
@@ -283,8 +184,7 @@ class AddMovieForm extends Component {
 const mapStateToProps = (state) => {
     const addMovieFormIsOpened = state.layoutState.addMovieFormIsOpened;
     const genre = state.genre.genre;
- 
-    
+     
     return ({ addMovieFormIsOpened, genre});
 }
 

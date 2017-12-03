@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 export const Mainmenu = (props) => {
         return (
             <div className = 'ak-mainmenu ak-mainmenuline_mainmenu'>
-                <div className = 'ak-mainmenu_item'
+                <div className = {props.addMovieBtnIsOpened? 'ak-mainmenu_item': 'ak-mainmenu_item__hide'}
                     onClick = {() => {props.addMovieFormHide()}}
                 >
                     Add movie                

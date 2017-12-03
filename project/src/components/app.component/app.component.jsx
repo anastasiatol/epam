@@ -21,7 +21,8 @@ import {
     addToMyLibrary,
     deleteFromMyLibrary,
     cancelSearch,
-    doAdvancedSearch
+    doAdvancedSearch,
+    changeHeadrStyle    
 } from './../../store/actions/index.js'
 import "./app.component.less";
 import { Sidebar } from '../../components/sidebar.component/sidebar.component.jsx';
@@ -38,6 +39,10 @@ class App extends Component {
     constructor (props) {
         super (props);
 
+        this.state ={
+            textSearch : ''
+        }
+
         this.movieToFind = this.movieToFind.bind(this);
         this.itemIsInLibrary = this.itemIsInLibrary.bind(this);
 
@@ -50,10 +55,7 @@ class App extends Component {
     }
 
     movieToFind(e) {
-        let filteredMovies = this.props.movieCollection.filter((item) =>{
-            return item.title.toLowerCase().indexOf(e.toLowerCase()) !== -1});
-          
-        this.setState ({movieCollection: filteredMovies}); 
+        this.setState ({textSearch : e.target.value}); 
     }
     
     itemIsInLibrary(e) {
@@ -63,54 +65,64 @@ class App extends Component {
         return false; 
     }
 
+    componentWillMount () {
+        this.props.changeHeadrStyle('app')
+    }
+
     render() {
         return (
             <Router>
                 <div className ='ak-container'>
                     <Sidebar sidebarStateIsOpened = {this.props.sidebarStateIsOpened} hideSidebar = {this.props.hideSidebar.bind(this)}/>
                     <div className = {this.props.sidebarStateIsOpened? 'ak-maininformation ak-container_maininformation' : 'ak-maininformation ak-container_maininformation ak-container_maininformation__nosidebar'}>
-                        <div className ='ak-mainmenuline ak-maininformation_mainmenuline'> 
-                            <div className = 'ak-searchfield ak-mainmenuline_searchfield'>
-                                <CommonInput className = 'ak-searchfield_text'/>
+                        <div className = 'ak-mainmenuline ak-maininformation_mainmenuline'> 
+                            <div className = {this.props.commonSearchIsOpened? 'ak-searchfield ak-mainmenuline_searchfield' : 'ak-searchfield ak-mainmenuline_searchfield__hide'}>
+                                <CommonInput value = {this.state.textSearch}
+                                    onEvent = {this.movieToFind.bind(this)}
+                                />
                                 <div className = 'ak-searchfield_icon'
                                     onClick = {this.props.hideAdvancedSearch}>
                                     find
                                 </div>
                             </div>
-                            <Mainmenu addMovieFormHide = {this.props.addMovieFormHide.bind(this)}/>
+                            <Mainmenu addMovieBtnIsOpened = {this.props.addMovieBtnIsOpened}
+                                addMovieFormHide = {this.props.addMovieFormHide.bind(this)}/>
                         </div>  
                         <AdvancedSearch advancedSearchIsOpened = {this.props.advancedSearchIsOpened}/> 
                         <AddMovieForm /> 
                         <Switch>
                             <Route exact path = '/movies' 
                                 render = {() => (<Collection 
-                                    collection = {this.props.filteredMovies} 
+                                    collection = {this.props.filteredMovies.filter((item) => {return item.title.toLowerCase().indexOf(this.state.textSearch.toLowerCase()) !== -1} )} 
                                     addToMyLibrary = {this.props.addToMyLibrary.bind(this)}
                                     deleteFromMyLibrary = {this.props.deleteFromMyLibrary.bind(this)}
-                                    itemIsInLibrary = {this.itemIsInLibrary.bind(this)}    
+                                    itemIsInLibrary = {this.itemIsInLibrary.bind(this)}
+                                    changeHeadrStyle = {this.props.changeHeadrStyle.bind(this)}    //bind?
                                     pathWay = 'movie' />)}
                             />
                             <Route exact path = '/tvshows' 
                                 render = {() => (<Collection 
-                                    collection = {this.props.filteredShows} 
+                                    collection = {this.props.filteredShows.filter((item) => {return item.title.toLowerCase().indexOf(this.state.textSearch.toLowerCase()) !== -1} )} 
                                     addToMyLibrary = {this.props.addToMyLibrary.bind(this)}
                                     deleteFromMyLibrary = {this.props.deleteFromMyLibrary.bind(this)}
-                                    itemIsInLibrary = {this.itemIsInLibrary.bind(this)} 
+                                    itemIsInLibrary = {this.itemIsInLibrary.bind(this)}
+                                    changeHeadrStyle = {this.props.changeHeadrStyle.bind(this)} 
                                     pathWay = 'tvshows'/>)}
                             />
                             <Route exact path = '/mylibrary' 
                                 render = {() => (<Collection 
-                                    collection = {this.props.filteredMylibrary}
+                                    collection = {this.props.filteredMylibrary.filter((item) => {return item.title.toLowerCase().indexOf(this.state.textSearch.toLowerCase()) !== -1} )}
                                     addToMyLibrary = {this.props.addToMyLibrary.bind(this)}
                                     deleteFromMyLibrary = {this.props.deleteFromMyLibrary.bind(this)}
-                                    itemIsInLibrary = {this.itemIsInLibrary.bind(this)} 
+                                    itemIsInLibrary = {this.itemIsInLibrary.bind(this)}
+                                    changeHeadrStyle = {this.props.changeHeadrStyle.bind(this)} 
                                     pathWay = 'mylibrary'/>)}
                                     />
                             <Route path='/movie/:id' render={(props)=> <InfoPage pathWay = 'movie' id = {props.match.params.id}/>}/>
                             <Route path='/tvshows/:id' render={(props)=> <InfoPage pathWay = 'tvshows' id = {props.match.params.id}/>}/>
                             <Route path='/mylibrary/:id' render={(props)=> <InfoPage pathWay = 'mylibrary' id = {props.match.params.id}/>}/>
-                            <Route path='/about' render={()=> <AboutMeInfoPage/>}/>
-                            <Route path='/support' render={() => <Support/>}/>
+                            <Route path='/about' render={()=> <AboutMeInfoPage changeHeadrStyle = {this.props.changeHeadrStyle.bind(this)}/>}/>
+                            <Route path='/support' render={() => <Support changeHeadrStyle = {this.props.changeHeadrStyle.bind(this)}/>}/>
                         </Switch> 
                     </div>    
                 </div>
@@ -130,7 +142,9 @@ const mapStateToProps = (state) => {
     var filteredMovies = state.movieCollection.filteredMovies;
     var filteredShows = state.tvShowCollection.filteredShows;
     var filteredMylibrary = state.myLibraryCollection.filteredMylibrary;
-    var advancedSearch = state.advancedSearch.advancedSearch
+    var advancedSearch = state.advancedSearch.advancedSearch;
+    var commonSearchIsOpened = state.layoutState.commonSearchIsOpened;
+    var addMovieBtnIsOpened = state.layoutState.addMovieBtnIsOpened;
     
     return ({ addMovieFormIsOpened , 
         sidebarStateIsOpened, 
@@ -142,7 +156,9 @@ const mapStateToProps = (state) => {
         filteredMovies,
         filteredShows,
         filteredMylibrary,
-        advancedSearch
+        advancedSearch,
+        addMovieBtnIsOpened,
+        commonSearchIsOpened
     });
 }
 
@@ -158,7 +174,8 @@ const mapDispatchToProps = (dispatch) => ({
     deleteFromMyLibrary: (item) => dispatch(deleteFromMyLibrary(item)),
     getSavedSearch: () => dispatch(getSavedSearch()),
     cancelSearch: () => dispatch(cancelSearch()),
-    doAdvancedSearch: (dataSearch) => dispatch(doAdvancedSearch(dataSearch))
+    doAdvancedSearch: (dataSearch) => dispatch(doAdvancedSearch(dataSearch)),
+    changeHeadrStyle: (e) => dispatch(changeHeadrStyle(e))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

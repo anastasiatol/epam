@@ -31,7 +31,7 @@ export function myLibraryCollectionReducer (state = initialState, action) {
             return {
                 ...state,
                 myLibraryCollection: [...state.myLibraryCollection, action.payload],
-                filteredMylibrary: [...state.filteredMylibrary, action.payload]
+                filteredMylibrary: [...state.filteredMylibrary, filteredItem[0]]
             };
 
         case 'DELETE_FROM_MY_LIBRARY':
@@ -42,9 +42,11 @@ export function myLibraryCollectionReducer (state = initialState, action) {
             localStorage.setItem('mylibrary', newlocalStorageMyLibrarySTR);
 
             let newMyLibraryCollection = state.myLibraryCollection.filter(v => v.id !== action.payload.id);
+            let newfilteredMylibrary = state.filteredMylibrary.filter(v => v.id !== action.payload.id);
             return {
                 ...state,
-                myLibraryCollection: newMyLibraryCollection
+                myLibraryCollection: newMyLibraryCollection,
+                filteredMylibrary: newfilteredMylibrary
             };
 
         case 'DO_ADVANCED_SEARCH':

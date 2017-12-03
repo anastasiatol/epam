@@ -10,7 +10,8 @@ import {
 
 import { 
     getSimilarMovieFromServer,
-    getSimilarTVFromServer   
+    getSimilarTVFromServer,
+    changeHeadrStyle   
 } from './../../store/actions/index.js'
 
 import "./info-page.component.less"; 
@@ -24,12 +25,12 @@ class InfoPage extends Component {
         
         
         this.props.movieCollection.forEach(function(item) {
-            if (item.id === +this.props.id) {
+            if (+item.id === +this.props.id) {
                 this.state= {currentEllement : item}
             }
         }, this);
         this.props.showCollection.forEach(function(item) {
-            if (item.id === +this.props.id) {
+            if (+item.id === +this.props.id) {
                 this.state= {currentEllement : item}
             }
         }, this);
@@ -54,6 +55,10 @@ class InfoPage extends Component {
             this.props.getSimilarTVFromServer(`https://api.themoviedb.org/3/tv/${item.id}/similar?api_key=ed17cc3db4b89c8d4e968b98ff4f8266&language=en-US&page=1`)
 
         }
+    }
+
+    componentWillMount(e) {
+        changeHeadrStyle('infoPage')
     }
 
     render() {
@@ -97,11 +102,11 @@ class InfoPage extends Component {
                         max = {10}
                     />
                 </div>
-                <div className = 'ak-info_recommended ak-recommended'>
-                    <div className = 'ak-recommended_text'>
+                <div className = 'ak-info_recommended'>
+                    <div className = 'ak-info_recommended-text'>
                         We also recommended
                     </div>
-                    <div className = 'ak-recommended_movies'>
+                    <div className = 'ak-info_recommended-movies'>
                         {(this.props.pathWay === 'movie')? 
                             this.props.similarMovies
                                 .map((item, index) => {
@@ -110,7 +115,7 @@ class InfoPage extends Component {
                                         key = {index} 
                                         id = {item.id}
                                         onClick = {()=>this.changeCurrentElement(item)}>
-                                            <div className = 'ak-recommended_movie'
+                                            <div className = 'ak-info_recommended-movie'
                                                 key= {index}
                                                 style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${item.poster_path})`}}
                                             />
@@ -124,7 +129,7 @@ class InfoPage extends Component {
                                         key = {index} 
                                         id = {item.id}
                                         onClick = {()=>this.changeCurrentElement(item)}>
-                                            <div className = 'ak-recommended_movie'
+                                            <div className = 'ak-info_recommended-movie'
                                                 key= {index}
                                                 style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${item.poster_path})`}}
                                             />
@@ -157,7 +162,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
     getSimilarMovieFromServer: (url) => dispatch(getSimilarMovieFromServer(url)),
-    getSimilarTVFromServer: (url) => dispatch(getSimilarTVFromServer(url))
+    getSimilarTVFromServer: (url) => dispatch(getSimilarTVFromServer(url)),
+    changeHeadrStyle: (e) => dispatch(changeHeadrStyle(e))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InfoPage)

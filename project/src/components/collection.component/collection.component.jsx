@@ -17,6 +17,10 @@ export class Collection extends Component {
         
     }
 
+    componentDidUpdate () {
+        this.props.changeHeadrStyle(this.props.pathWay)
+    }
+
     render() {
         return (
             <div className = 'ak-moviecollection ak-maininformation_moviecollection'>    

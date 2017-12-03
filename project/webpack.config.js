@@ -63,13 +63,22 @@ module.exports = {
             },
             {
                 test: /\.(jpg|png|svg)$/,
-                use: [ "file-loader" ]
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'assets/img/[name].[ext]'
+                        }
+                    }
+                ]
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: [ "file-loader" ]
+                use: [
+                    "file-loader"
+                ]
             }
-        ]
+        ]        
     },
     plugins: [
                 new HtmlWebpackPlugin({template: './src/index.html',  filename: './build/index.html'})        

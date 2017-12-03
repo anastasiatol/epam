@@ -15,3 +15,10 @@ export function hideAdvancedSearch() {
         type: 'CHANGE_ADVANCED_SEARCH_STATE'
     };
 }
+
+export function changeHeadrStyle(payload) {
+    return {
+        type: 'CHANGE_HEADER_STYLE',
+        payload
+    };
+}

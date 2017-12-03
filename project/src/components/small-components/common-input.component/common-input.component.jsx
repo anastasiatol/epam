@@ -6,17 +6,17 @@ export class CommonInput extends Component {
 
     render () {
         return (
-            <div>
-                <label className = 'ak-addmovieform_label'>
+            <div className = 'ak-common-input'>
+                <label className = 'ak-common-input_label'>
                     {this.props.title}
                 </label>
-                <input className = 'ak-addmovieform_input' 
+                <input className = 'ak-common-input_input' 
                     type="text" 
                     name = {this.props.name}
                     value = {this.props.value}
                     onChange = {this.props.onEvent}
                 />
-                <div className = 'ak-addmovieform_errormessage'>
+                <div className = 'ak-common-input_errormessage'>
                     {this.props.erorrMessage}
                 </div>
             </div>

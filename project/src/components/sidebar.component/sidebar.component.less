@@ -1,32 +1,39 @@
 @backgroundsidebar: rgb(57, 59, 85);
 @mainfont: rgb(255, 255, 255);
+@activLink: royalblue;
 
-.ak-sidebar {
+.ak-container_sidebar {
     position: fixed;
     height: 100%;
     background-color: @backgroundsidebar;
     color: @mainfont;
-    
 }
 
 .ak-sidebar_item {
     display: flex;
     margin: 30px 20px;
-    
+    align-items: center; 
 }
 
-.ak-sidebar_logo__big{
+.ak-sidebar_logo{
     margin: 10px;
+    width: 50px;
+    height: 30px;
 }
 
-.ak-sidebar_icon {
-    margin: 10px;
+.ak-sidebar_link {
     text-decoration: none;
     color: @mainfont;
 }
 
-.ak-sidebar_icon:hover {
-    color: royalblue
+.ak-sidebar_link:hover {
+    color: @activLink
+}
+
+.ak-sidebar_icon{
+    width: 30px;
+    height: 30px;
+    margin: 10px;
 }
 
 .ak-sidebar_itemname{
@@ -36,18 +43,14 @@
 }
 
 .ak-sidebar_itemname.active{
-    color: royalblue
-
+    color: @activLink
 }
 
 .ak-sidebar_itemname:hover {
     color: rgb(5, 59, 221)
 }
 
-
-
-
-.ak-sidebar_logo__big__nosidebar {
+.ak-sidebar_logo__nosidebar {
     display: none;
 }
 

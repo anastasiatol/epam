@@ -6,11 +6,11 @@ export class CommonTextarea extends Component {
 
     render () {
         return (
-        <div>
-            <label className = 'ak-addmovieform_label'>
+        <div className = 'ak-textarea'>
+            <label className = 'ak-textarea_label'>
                 {this.props.lable}
             </label>
-            <textarea className = 'ak-addmovieform_input' 
+            <textarea className = 'ak-textarea_input' 
                 rows = '3'
                 name = {this.props.name}
                 value = {this.props.value}
