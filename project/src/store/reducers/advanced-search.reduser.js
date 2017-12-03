@@ -37,6 +37,7 @@ export function advancedSearchReducer (state = initialState, action) {
 
         case 'DO_ADVANCED_SEARCH':
             if (action.payload.rememberInputs) {
+                localStorage.removeItem('advancedsearch');
                 saveInLocalStorage (action.payload, 'advancedsearch');
             }
             return state;

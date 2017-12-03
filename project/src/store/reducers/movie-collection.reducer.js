@@ -1,5 +1,6 @@
 import { saveInLocalStorage } from './../../services/saveInLocalStorage.servise';
 import { advancedSearchServise } from './../../services/advanced-search.servise';
+import { advancedSearchInitialServise } from './../../services/advanced-search-initial.servise';
 
 var initialState = {
     movieCollection: [],
@@ -10,10 +11,11 @@ var initialState = {
 export function movieCollectionReducer (state = initialState, action) {
     switch (action.type) {
         case 'MOVIES_FROM_SERVER':
+            var filteredMoviesArray = advancedSearchServise (action.payload, advancedSearchInitialServise());
             return {
                 ...state,
                 movieCollection: action.payload,
-                filteredMovies: action.payload
+                filteredMovies: filteredMoviesArray
             };
 
         case 'SIMILAR_MOVIES_FROM_SERVER' :
@@ -27,7 +29,7 @@ export function movieCollectionReducer (state = initialState, action) {
             return {
                 ...state,
                 movieCollection: [...state.movieCollection, action.payload]
-            }; //filtered movies ????
+            };
 
         case 'DO_ADVANCED_SEARCH':
             let filteredMoviesArr = advancedSearchServise (state.movieCollection, action.payload);

@@ -100,7 +100,7 @@ class App extends Component {
                             />
                             <Route exact path = '/mylibrary' 
                                 render = {() => (<Collection 
-                                    collection = {this.props.mylibrary}
+                                    collection = {this.props.filteredMylibrary}
                                     addToMyLibrary = {this.props.addToMyLibrary.bind(this)}
                                     deleteFromMyLibrary = {this.props.deleteFromMyLibrary.bind(this)}
                                     itemIsInLibrary = {this.itemIsInLibrary.bind(this)} 

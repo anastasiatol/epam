@@ -1,4 +1,5 @@
 import { advancedSearchServise } from './../../services/advanced-search.servise';
+import { advancedSearchInitialServise } from './../../services/advanced-search-initial.servise';
 
 var initialState = {
     showCollection: [],
@@ -9,10 +10,11 @@ var initialState = {
 export function tvShowCollectionReducer (state = initialState, action) {
     switch (action.type) {
         case 'TVSHOW_FROM_SERVER':
+        var filteredShowsArray = advancedSearchServise (action.payload, advancedSearchInitialServise());
             return {
                 ...state,
                 showCollection: action.payload,
-                filteredShows: action.payload
+                filteredShows: filteredShowsArray
             };
 
         case 'SIMILAR_TV_FROM_SERVER' :

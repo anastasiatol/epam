@@ -11,7 +11,6 @@ const getTVShow = store => next => action => {
             showCollection = showCollection.map((item) => {
                 return new IdentityTVShow(item);
             });
-            console.log( showCollection);
             store.dispatch({
                 type: 'TVSHOW_FROM_SERVER',
                 payload: showCollection

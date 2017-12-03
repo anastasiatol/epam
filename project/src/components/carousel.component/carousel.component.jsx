@@ -47,7 +47,7 @@ export class Carousel extends Component {
             <div className = 'ak-carousel ak-my-info-page_carousel'>
                 <img className = 'ak-carousel_picture'
                     src = {this.imgArr[this.state.currentImg]}  
-                    alt = 'pic'/> 
+                    alt = 'img'/> 
                 <div className = 'ak-carousel_buttons'>
                     <div className = 'ak-carousel_single-button'
                         onClick = {()=> this.previousImg()}>
