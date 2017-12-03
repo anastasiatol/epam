@@ -16,9 +16,12 @@ export class Collection extends Component {
         super(props);
         
     }
-
-    componentDidUpdate () {
+    
+    componentWillMount () {
         this.props.changeHeadrStyle(this.props.pathWay)
+    }
+    componentWillUpdate (nextProps) {
+        this.props.changeHeadrStyle(nextProps.pathWay)
     }
 
     render() {

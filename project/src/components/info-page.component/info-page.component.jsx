@@ -58,7 +58,7 @@ class InfoPage extends Component {
     }
 
     componentWillMount(e) {
-        changeHeadrStyle('infoPage')
+        this.props.changeHeadrStyle('infoPage')
     }
 
     render() {

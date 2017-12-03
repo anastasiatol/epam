@@ -71,7 +71,7 @@ export function layoutStateReducer (state = initialState, action) {
                         addMovieFormIsOpened: false
                     };
                 }
-                if (action.payload === 'info') {
+                if (action.payload === 'infoPage') {
                     return{
                         ...state,
                         commonSearchIsOpened: false,

@@ -7,7 +7,6 @@ import {
     } from 'react-router-dom'
 import { connect } from 'react-redux'; 
 
-//import '../../shared/font-awesome/css/font-awesome.min.css'
 import "./sidebar.component.less";
 
 export class Sidebar extends Component {
