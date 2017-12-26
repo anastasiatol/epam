@@ -18,6 +18,8 @@ import "./info-page.component.less";
 
 import { Progressbar } from './../small-components/progressbar.component/progressbar.component.jsx'
 
+let defaultPoster = require('./../../img/default-poster.png');
+
 class InfoPage extends Component {
 
     constructor(props) {  
@@ -66,7 +68,7 @@ class InfoPage extends Component {
             <div className = 'ak-maininformation_info ak-info'>
                 <div className = 'ak-info_poster-overview' >   
                     <div className = 'ak-info_poster'
-                        style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${this.state.currentEllement.poster_path})`}}>
+                        style = {{backgroundImage : this.state.currentEllement.poster_path}}>
                     </div>
                     <div className = 'ak-info_name-overview'>
                         <div className = 'ak-info_name'>
@@ -117,7 +119,7 @@ class InfoPage extends Component {
                                         onClick = {()=>this.changeCurrentElement(item)}>
                                             <div className = 'ak-info_recommended-movie'
                                                 key= {index}
-                                                style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${item.poster_path})`}}
+                                                style = {{backgroundImage : item.poster_path}}
                                             />
                                         </NavLink>
                                     )}
@@ -131,7 +133,7 @@ class InfoPage extends Component {
                                         onClick = {()=>this.changeCurrentElement(item)}>
                                             <div className = 'ak-info_recommended-movie'
                                                 key= {index}
-                                                style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${item.poster_path})`}}
+                                                style = {{backgroundImage : item.poster_path}}
                                             />
                                         </NavLink>
                                     )}

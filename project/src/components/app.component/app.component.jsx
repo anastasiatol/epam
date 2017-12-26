@@ -4,7 +4,8 @@ import {
     HashRouter as Router,
     Route,
     NavLink,
-    Switch
+    Switch,
+    Redirect
     } from 'react-router-dom';
 import { connect } from 'react-redux'; 
 
@@ -91,6 +92,7 @@ class App extends Component {
                         <AdvancedSearch advancedSearchIsOpened = {this.props.advancedSearchIsOpened}/> 
                         <AddMovieForm /> 
                         <Switch>
+                            <Redirect exact path = '/' to = '/movies'/>
                             <Route exact path = '/movies' 
                                 render = {() => (<Collection 
                                     collection = {this.props.filteredMovies.filter((item) => {return item.title.toLowerCase().indexOf(this.state.textSearch.toLowerCase()) !== -1} )} 

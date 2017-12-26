@@ -7,6 +7,8 @@ import {
     Switch
     } from 'react-router-dom'
 
+let defaultPoster = require('./../../img/default-poster.png');
+
 export class ItemCollection extends Component {
 
     constructor(props) {
@@ -27,7 +29,7 @@ export class ItemCollection extends Component {
     render() {
         return (
             <div className = {(this.props.isInLibrary)? 'ak-moviecollection_movie ak-movie ak-movie__inlibrary' : 'ak-moviecollection_movie ak-movie'}
-                style = {{backgroundImage : `url(https://image.tmdb.org/t/p/w500${this.props.item.poster_path})`}}>
+                style = {{backgroundImage : this.props.item.poster_path}}>
                 <div className = 'ak-movie_mask'>
                     <div className = 'ak-movie_button-container'>
                         <div className = 'ak-movie_button ak-movie_button__info'

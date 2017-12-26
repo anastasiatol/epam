@@ -12,6 +12,8 @@ import { CommonInput } from './../small-components/common-input.component/common
 import { CommonTextarea } from '../small-components/common-textarea.component/common-textarea.component.jsx';
 import { GenreList} from './../small-components/genre-list.component/genre-list.component.jsx'
 
+let defaultPoster = require('./../../img/default-poster.png');
+
 class AddMovieForm extends Component {
 
     constructor(props) {
@@ -79,6 +81,7 @@ class AddMovieForm extends Component {
                     }
                 }
             }
+            this.checkValid();
         }
     }
 
@@ -108,7 +111,7 @@ class AddMovieForm extends Component {
             overview : this.state.overview,
             genre_ids : this.state.genre_ids,
             adult: this.state.adult,
-            poster_path: this.state.poster_path,
+            poster_path: 'url(../img/default-poster.png)',
             type: 'movie',
             id: (Date.now().toString())           
         }

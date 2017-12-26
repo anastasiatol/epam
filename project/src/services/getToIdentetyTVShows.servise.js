@@ -4,7 +4,7 @@ export class IdentityTVShow {
         this.genre_ids = identity.genre_ids || [];
         this.title = identity.name || '';
         this.overview = identity.overview || '';
-        this.poster_path = identity.poster_path || '';
+        this.poster_path = 'url(https://image.tmdb.org/t/p/w500' + identity.poster_path || '';
         this.adult = identity.adult || false;
         this.vote_average = identity.vote_average || '';
         this.popularity = identity.popularity || '';
